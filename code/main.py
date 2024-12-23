@@ -39,6 +39,9 @@ sys.setrecursionlimit(5 * 10**5)
 
 # 関数
 def is_prime(n):
+    if n == 1:
+        return False
+
     def f(a, t, n):
         x = pow(a, t, n)
         nt = n - 1
@@ -128,6 +131,7 @@ def factorization(n):
 class TestMathFunctions(unittest.TestCase):
     def test_is_prime(self):
         test_cases = [
+            (1, False),
             (2, True),
             (3, True),
             (4, False),
