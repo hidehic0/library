@@ -343,7 +343,7 @@ class Trie:
             if t not in childs:
                 break
 
-            if self.data[childs[t]] == 1:
+            if self.data[childs[t]].count == 1:
                 break
 
             cur = childs[t]
