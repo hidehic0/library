@@ -1,5 +1,5 @@
 r"""
- ______________________
+
 < it's hidehico's code >
  ----------------------
    \
@@ -330,8 +330,8 @@ class Trie:
                 childs[t] = len(self.data)
                 self.data.append(nd)
 
-            result += self.data[childs[t]].count - 1
             cur = childs[t]
+            result += self.data[childs[t]].count - 1
 
         return result
 
@@ -382,3 +382,12 @@ if sys.argv == ["code/main.py"]:
     unittest.main()
 
 # コード
+N = ii()
+S = sl()
+TR = Trie()
+ans = 0
+
+for s in S:
+    ans += TR.add(s)
+
+print(ans)
