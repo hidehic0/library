@@ -329,7 +329,7 @@ class Trie:
                 childs[t] = len(self.data)
                 self.data.append(nd)
 
-            cur = self.data[childs[t].ind]
+            cur = childs[t]
 
         return None
 
