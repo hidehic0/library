@@ -351,6 +351,24 @@ class Trie:
 
         return result
 
+    def lcp_sum(self, value: str) -> int:
+        cur = 0
+        result = 0
+
+        for t in value:
+            childs = self.data[cur].childs
+
+            if t not in childs:
+                break
+
+            if self.data[childs[t]].count == 1:
+                break
+
+            cur = childs[t]
+            result += self.data[childs[t]].count - 1
+
+        return result
+
 
 # 便利変数
 INF = 1 << 63
