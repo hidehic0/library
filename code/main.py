@@ -315,8 +315,9 @@ class Trie:
     def __init__(self):
         self.data = [self.Data("ab", 0)]  # 初期値はabにして被らないようにする
 
-    def add(self, value: str) -> None:
+    def add(self, value: str) -> int:
         cur = 0
+        result = 0
 
         # 再帰的に探索する
         for t in value:
@@ -329,9 +330,10 @@ class Trie:
                 childs[t] = len(self.data)
                 self.data.append(nd)
 
+            result += self.data[childs[t]].count - 1
             cur = childs[t]
 
-        return None
+        return result
 
     def lcp_max(self, value: str) -> int:
         cur = 0
