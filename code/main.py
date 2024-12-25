@@ -304,6 +304,35 @@ class GraphW:
         return self.grath
 
 
+class Trie:
+    class Data:
+        def __init__(self, value, ind):
+            self.count = 1
+            self.value = value
+            self.childs = {}
+            self.ind = ind
+
+    def __init__(self):
+        self.data = [self.Data("ab", 0)]  # 初期値はabにして被らないようにする
+
+    def add(self, value):
+        # 要素を追加
+        cur = 0
+
+        # 再帰的に探索する
+        for t in range(len(value)):
+            childs = self.data[cur].childs  # 参照渡しで
+
+            if t in childs:
+                childs[t].count += 1
+            else:
+                nd = self.Data(t, len(self.data))
+                childs[t] = len(self.data)
+                self.data.append(nd)
+
+            cur = self.data[childs[t].ind]
+
+
 # 便利変数
 INF = 1 << 63
 lowerlist = list("abcdefghijklmnopqrstuvwxyz")
