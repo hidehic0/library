@@ -315,22 +315,41 @@ class Trie:
     def __init__(self):
         self.data = [self.Data("ab", 0)]  # 初期値はabにして被らないようにする
 
-    def add(self, value):
-        # 要素を追加
+    def add(self, value: str) -> None:
         cur = 0
 
         # 再帰的に探索する
-        for t in range(len(value)):
+        for t in value:
             childs = self.data[cur].childs  # 参照渡しで
 
             if t in childs:
-                childs[t].count += 1
+                self.data[childs[t]].count += 1
             else:
                 nd = self.Data(t, len(self.data))
                 childs[t] = len(self.data)
                 self.data.append(nd)
 
             cur = self.data[childs[t].ind]
+
+        return None
+
+    def lcp_max(self, value: str) -> int:
+        cur = 0
+        result = 0
+
+        for t in value:
+            childs = self.data[cur].childs
+
+            if t not in childs:
+                break
+
+            if self.data[childs[t]] == 1:
+                break
+
+            cur = childs[t]
+            result += 1
+
+        return result
 
 
 # 便利変数
