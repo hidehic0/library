@@ -1,3 +1,4 @@
+#!/usr/bin/env pypy3
 r"""
  ______________________
 < it's hidehico's code >
