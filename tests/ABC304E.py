@@ -437,3 +437,36 @@ if sys.argv == ["code/main.py"]:
     unittest.main()
 
 # コード
+N, M = il()
+UF = UnionFind(N)
+
+for _ in [0] * M:
+    u, v = il(-1)
+
+    UF.unite(u, v)
+
+K = ii()
+bp = set()
+
+for _ in [0] * K:
+    x, y = il(-1)
+    x = UF.root(x)
+    y = UF.root(y)
+    bp.add((x, y))
+    bp.add((y, x))
+
+
+def solve():
+    p, q = il(-1)
+    a, b = UF.root(p), UF.root(q)
+
+    if (a, b) in bp or (b, a) in bp:
+        print("No")
+    else:
+        print("Yes")
+
+
+Q = ii()
+
+for _ in [0] * Q:
+    solve()
