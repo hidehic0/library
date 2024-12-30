@@ -343,8 +343,8 @@ class UnionFind:
         if self.data[ra] > self.data[rb]:
             ra, rb = rb, ra
 
-        self.data[rb] = ra
         self.data[ra] += self.data[rb]
+        self.data[rb] = ra
 
         return True
 
