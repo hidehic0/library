@@ -319,12 +319,10 @@ class UnionFind:
         self.hist = []
 
     def root(self, vtx: int) -> int:
-        cur = vtx
+        if self.data[vtx] < 0:
+            return vtx
 
-        while self.data[cur] >= 0:
-            cur = self.data[cur]
-
-        return cur
+        return self.root(self.data[vtx])
 
     def same(self, a: int, b: int):
         return self.root(a) == self.root(b)
