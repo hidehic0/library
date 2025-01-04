@@ -289,7 +289,7 @@ class GraphW:
     def side_input(self):
         # 新しい辺をinput
         a, b, w = il(-1)
-        self.new_side(a, b, w)
+        self.new_side(a, b, w+1)
 
     def input(self, M: int):
         # 複数行の辺のinput
