@@ -211,6 +211,30 @@ def YN(state: bool, upper: bool = False) -> None:
     print(res)
 
 
+def YE(state: bool, upper: bool = False) -> bool | None:
+    """
+    boolがTrueならYesを出力してexit
+    """
+
+    if not state:
+        return False
+
+    YN(True, upper)
+    exit()
+
+
+def NE(state: bool, upper: bool = False) -> bool | None:
+    """
+    boolがTrueならNoを出力してexit
+    """
+
+    if not state:
+        return False
+
+    YN(False, upper)
+    exit()
+
+
 # ac-library用メモ
 """
 segtree
