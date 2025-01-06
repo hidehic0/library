@@ -187,6 +187,21 @@ def li(n: int, func, *args):
     return [func(*args) for _ in [0] * n]
 
 
+# YesNo関数
+def YN(state: bool) -> None:
+    if state:
+        print("YES")
+    else:
+        print("NO")
+
+
+def Yn(state: bool) -> None:
+    if state:
+        print("Yes")
+    else:
+        print("No")
+
+
 # ac-library用メモ
 """
 segtree
@@ -289,7 +304,7 @@ class GraphW:
     def side_input(self):
         # 新しい辺をinput
         a, b, w = il(-1)
-        self.new_side(a, b, w+1)
+        self.new_side(a, b, w + 1)
 
     def input(self, M: int):
         # 複数行の辺のinput
