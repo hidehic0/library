@@ -16,14 +16,14 @@ r"""
 
 # ライブラリと関数と便利変数
 # ライブラリ
-from collections import deque, defaultdict, Counter
-from math import pi, gcd, lcm
-from itertools import permutations
 import bisect
-import sys
 import heapq
-from typing import List, Any
+import sys
 import unittest
+from collections import Counter, defaultdict, deque
+from itertools import permutations
+from math import gcd, lcm, pi
+from typing import Any, List
 
 # from atcoder.segtree import SegTree
 # from atcoder.lazysegtree import LazySegTree
@@ -187,6 +187,54 @@ def li(n: int, func, *args):
     return [func(*args) for _ in [0] * n]
 
 
+# YesNo関数
+def YesNoTemplate(state: bool, upper: bool = False) -> str:
+    """
+    stateがTrueなら、upperに応じてYes,YESをreturn
+    stateがFalseなら、upperに応じてNo,NOをreturnする
+    """
+    YES = ["Yes", "YES"]
+    NO = ["No", "NO"]
+
+    if state:
+        return YES[int(upper)]
+    else:
+        return NO[int(upper)]
+
+
+def YN(state: bool, upper: bool = False) -> None:
+    """
+    先程のYesNoTemplate関数の結果を出力する
+    """
+    res = YesNoTemplate(state, upper)
+
+    print(res)
+
+
+def YE(state: bool, upper: bool = False) -> bool | None:
+    """
+    boolがTrueならYesを出力してexit
+    """
+
+    if not state:
+        return False
+
+    YN(True, upper)
+    exit()
+
+
+def NE(state: bool, upper: bool = False) -> bool | None:
+    """
+    boolがTrueならNoを出力してexit
+    """
+
+    if not state:
+        return False
+
+    YN(False, upper)
+    exit()
+
+
 # ac-library用メモ
 """
 segtree
@@ -289,7 +337,7 @@ class GraphW:
     def side_input(self):
         # 新しい辺をinput
         a, b, w = il(-1)
-        self.new_side(a, b, w+1)
+        self.new_side(a, b, w + 1)
 
     def input(self, M: int):
         # 複数行の辺のinput
