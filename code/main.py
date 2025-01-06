@@ -16,14 +16,14 @@ r"""
 
 # ライブラリと関数と便利変数
 # ライブラリ
-from collections import deque, defaultdict, Counter
-from math import pi, gcd, lcm
-from itertools import permutations
 import bisect
-import sys
 import heapq
-from typing import List, Any
+import sys
 import unittest
+from collections import Counter, defaultdict, deque
+from itertools import permutations
+from math import gcd, lcm, pi
+from typing import Any, List
 
 # from atcoder.segtree import SegTree
 # from atcoder.lazysegtree import LazySegTree
@@ -188,18 +188,27 @@ def li(n: int, func, *args):
 
 
 # YesNo関数
-def YN(state: bool) -> None:
+def YesNoTemplate(state: bool, upper: bool = False) -> str:
+    """
+    stateがTrueなら、upperに応じてYes,YESをreturn
+    stateがFalseなら、upperに応じてNo,NOをreturnする
+    """
+    YES = ["Yes", "YES"]
+    NO = ["No", "NO"]
+
     if state:
-        print("YES")
+        return YES[int(upper)]
     else:
-        print("NO")
+        return NO[int(upper)]
 
 
-def Yn(state: bool) -> None:
-    if state:
-        print("Yes")
-    else:
-        print("No")
+def YN(state: bool, upper: bool = False) -> None:
+    """
+    先程のYesNoTemplate関数の結果を出力する
+    """
+    res = YesNoTemplate(state, upper)
+
+    print(res)
 
 
 # ac-library用メモ
