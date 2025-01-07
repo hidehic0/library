@@ -6,3 +6,4 @@ touch code/main.py
 # /bin/cat python/<filename>.py >> code/main.py
 
 /bin/cat python/import.py >> code/main.py
+/bin/cat python/import.py >> code/main.py
