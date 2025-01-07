@@ -1,0 +1,14 @@
+name: merge split files
+
+on:
+  push
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: merge split files
+      run: merge_file.bash
