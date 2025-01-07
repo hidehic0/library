@@ -14,3 +14,8 @@ jobs:
       run: |
         chmod +x ./merge_file.bash
         ./merge_file.bash
+
+    - name: Auto Commit
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Merge split file by actions
