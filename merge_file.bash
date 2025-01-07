@@ -18,3 +18,5 @@ cat python/unionfind.py >> code/main.py
 cat python/trie.py >> code/main.py
 
 echo "作業完了"
+
+cat code/main.py
