@@ -13,3 +13,4 @@ touch code/main.py
 /bin/cat python/memo.py >> code/main.py
 /bin/cat python/grath.py >> code/main.py
 /bin/cat python/unionfind.py >> code/main.py
+/bin/cat python/trie.py >> code/main.py
