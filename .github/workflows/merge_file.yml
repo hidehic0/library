@@ -1,0 +1,16 @@
+name: merge split files
+
+on:
+  push
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: merge split files
+      run: |
+        chmod +x ./merge_file.bash
+        ./merge_file.bash
