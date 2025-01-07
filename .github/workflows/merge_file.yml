@@ -11,4 +11,6 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: merge split files
-      run: merge_file.bash
+      run: |
+        chmod +x ./merge_file.bash
+        ./merge_file.bash

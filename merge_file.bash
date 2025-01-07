@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-set -e
-
+#!/bin/bash
 rm code/main.py
 touch code/main.py
 
