@@ -10,6 +10,7 @@ echo "新しいmain.py作成完了"
 cat python/import.py >> code/main.py
 cat python/math_func.py >> code/main.py
 cat python/array_create.py >> code/main.py
+cat python/binary_search.py >> code/main.py
 cat python/standard_input.py >> code/main.py
 cat python/yn_func.py >> code/main.py
 cat python/memo.py >> code/main.py
