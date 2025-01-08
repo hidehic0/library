@@ -17,6 +17,7 @@ cat python/memo.py >> code/main.py
 cat python/grath.py >> code/main.py
 cat python/unionfind.py >> code/main.py
 cat python/trie.py >> code/main.py
+cat python/utils.py >> code/main.py
 
 echo "作業完了"
 
