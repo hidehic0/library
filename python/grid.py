@@ -28,4 +28,16 @@ def grid_moves(
     """
     res = []
 
+    for mx, my in moves:
+        nx, ny = x + mx, y + my
+
+        if not coordinate_check(nx, ny, H, W):
+            continue
+
+        for f in check_funcs:
+            if not f(nx, ny):
+                break
+        else:
+            res.append((nx, ny))
+
     return res
