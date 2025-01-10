@@ -89,24 +89,3 @@ def factorization(n):
         result.append([n, 1])
 
     return result
-
-
-import unittest
-
-
-class TestMathFunctions(unittest.TestCase):
-    def test_is_prime(self):
-        test_cases = [
-            (1, False),
-            (2, True),
-            (3, True),
-            (4, False),
-            (5, True),
-            (6, False),
-            (1747, True),
-            (256, False),
-        ]
-
-        for i, ans in test_cases:
-            with self.subTest(i=i):
-                self.assertEqual(is_prime(i), ans)

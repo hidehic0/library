@@ -2,9 +2,30 @@ name: merge split files
 
 on:
   push
+  pull_request
 
 jobs:
-  main:
+  run_unittest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 'pypy3.10'
+
+    - name: Check Python Version
+      run: python -V
+
+    - name: Run Test
+      run: python test.py
+      
+  merge_file:
     runs-on: ubuntu-latest
     permissions:
       contents: write
