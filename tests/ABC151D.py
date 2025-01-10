@@ -130,6 +130,27 @@ def factorization(n):
     return result
 
 
+import unittest
+
+
+class TestMathFunctions(unittest.TestCase):
+    def test_is_prime(self):
+        test_cases = [
+            (1, False),
+            (2, True),
+            (3, True),
+            (4, False),
+            (5, True),
+            (6, False),
+            (1747, True),
+            (256, False),
+        ]
+
+        for i, ans in test_cases:
+            with self.subTest(i=i):
+                self.assertEqual(is_prime(i), ans)
+
+
 # 多次元配列作成
 from typing import List, Any
 
@@ -547,4 +568,56 @@ INF = 1 << 63
 lowerlist = list("abcdefghijklmnopqrstuvwxyz")
 upperlist = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
+import unittest
+import sys
+
+# テストを実行する
+
+if sys.argv == ["code/main.py"]:
+    unittest.main()
+
 # コード
+H, W = il()
+S = li(H, s)
+MOVES = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+
+def ca(x, y):
+    if S[x][y] != "#":
+        return True
+    else:
+        return False
+
+
+def solve(sx, sy):
+    used = create_array2(H, W, -1)
+
+    def cb(x, y):
+        if used[x][y] == -1:
+            return True
+        else:
+            return False
+
+    Q = deque()
+    Q.append((sx, sy))
+    used[sx][sy] = 0
+
+    while Q:
+        x, y = Q.popleft()
+
+        for nx, ny in grid_moves(x, y, H, W, MOVES, ca, cb):
+            used[nx][ny] = used[x][y] + 1
+
+            Q.append((nx, ny))
+
+    return max([max(used[i]) for i in range(H)])
+
+
+ans = 0
+
+for sx in range(H):
+    for sy in range(W):
+        if ca(sx, sy):
+            ans = max(ans, solve(sx, sy))
+
+print(ans)
