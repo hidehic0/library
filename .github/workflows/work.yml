@@ -1,8 +1,7 @@
-name: merge split files
+name: unittest and merge split files
 
 on:
   push
-  pull_request
 
 jobs:
   run_unittest:
@@ -13,6 +12,8 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref }}
 
     - name: Setup Python
       uses: actions/setup-python@v5
@@ -27,6 +28,7 @@ jobs:
       
   merge_file:
     runs-on: ubuntu-latest
+    needs: [run_unittest]
     permissions:
       contents: write
 
