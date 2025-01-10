@@ -1,7 +1,15 @@
 name: unittest and merge split files
 
 on:
-  push
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+    branches:
+      - main
+      - develop
 
 jobs:
   run_unittest:
