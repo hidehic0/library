@@ -13,6 +13,7 @@ cat python/array_create.py >> code/main.py
 cat python/binary_search.py >> code/main.py
 cat python/standard_input.py >> code/main.py
 cat python/yn_func.py >> code/main.py
+cat python/grid.py >> code/main.py
 cat python/memo.py >> code/main.py
 cat python/grath.py >> code/main.py
 cat python/unionfind.py >> code/main.py
