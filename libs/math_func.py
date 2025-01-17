@@ -89,3 +89,11 @@ def factorization(n):
         result.append([n, 1])
 
     return result
+
+
+def simple_sigma(n: int) -> int:
+    r"""
+    1からnまでの総和を求める関数
+    つまり和の公式
+    """
+    return (n * (n + 1)) // 2
