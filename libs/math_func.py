@@ -89,3 +89,7 @@ def factorization(n):
         result.append([n, 1])
 
     return result
+
+
+def simple_sigma(n):
+    return n
