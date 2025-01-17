@@ -1,6 +1,6 @@
 import unittest
 from libs.grid import coordinate_check, grid_moves
-from libs.math_func import is_prime
+from libs.math_func import is_prime, simple_sigma
 
 
 class GridTests(unittest.TestCase):
@@ -36,6 +36,18 @@ class TestMathFunctions(unittest.TestCase):
         for i, ans in test_cases:
             with self.subTest(i=i):
                 self.assertEqual(is_prime(i), ans)
+
+    def test_simple_sigma(self):
+        test_cases = [
+            (3, 6),
+            (5000000000, 12500000002500000000),
+            (2000000000, 2000000001000000000),
+            (3090419468, 4775346245641911246),
+        ]
+
+        for i, ans in test_cases:
+            with self.subTest(i=i):
+                self.assertEqual(simple_sigma(i), ans)
 
 
 if __name__ == "__main__":
