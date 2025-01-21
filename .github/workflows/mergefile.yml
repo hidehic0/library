@@ -39,6 +39,9 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
 
+    - name: git pull
+      run: git pull
+
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
