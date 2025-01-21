@@ -185,14 +185,6 @@ def binary_search(fn: Callable[[int], bool], right: int = 0, left: int = -1) -> 
     return left
 
 
-def mod_add(a: int, b: int, mod: int):
-    return a + b
-
-
-def mod_sub(a: int, b: int, mod: int):
-    return a - b
-
-
 # 標準入力関数
 import sys
 
