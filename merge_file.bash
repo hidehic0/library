@@ -11,6 +11,7 @@ cat libs/import.py >> code/main.py
 cat libs/math_func.py >> code/main.py
 cat libs/array_create.py >> code/main.py
 cat libs/binary_search.py >> code/main.py
+cat libs/modint.py >> code/main.py
 cat libs/standard_input.py >> code/main.py
 cat libs/yn_func.py >> code/main.py
 cat libs/grid.py >> code/main.py
