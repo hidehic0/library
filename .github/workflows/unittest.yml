@@ -2,6 +2,7 @@ name: run unittest
 
 on:
   pull_request:
+  push:
 
 jobs:
   main:
