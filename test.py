@@ -1,7 +1,7 @@
 import unittest
 from libs.grid import coordinate_check, grid_moves
 from libs.math_func import is_prime, simple_sigma
-from libs.utils import lowerlist, upperlist
+from libs.utils import lowerlist, upperlist, INF
 
 
 class GridTests(unittest.TestCase):
@@ -57,6 +57,9 @@ class TestUtilsVariable(unittest.TestCase):
 
     def test_upperlist(self):
         self.assertEqual([chr(i) for i in range(65, 91)], upperlist)
+
+    def test_inf_value(self):
+        self.assertEqual(1 << 63, INF)
 
 
 if __name__ == "__main__":
