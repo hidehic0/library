@@ -186,11 +186,77 @@ def binary_search(fn: Callable[[int], bool], right: int = 0, left: int = -1) -> 
 
 
 def mod_add(a: int, b: int, mod: int):
-    return a + b
+    return (a + b) % mod
 
 
 def mod_sub(a: int, b: int, mod: int):
-    return a - b
+    return (a - b) % mod
+
+
+def mod_mul(a: int, b: int, mod: int):
+    return (a * b) % mod
+
+
+def mod_div(a: int, b: int, mod: int):
+    return (a * pow(b, mod - 2, mod)) % mod
+
+
+class ModInt:
+    def __init__(self, x: int, mod: int = 998244353) -> None:
+        self.x = x % mod
+        self.mod = mod
+
+    def val(self):
+        return self.x
+
+    def rhs(self, rhs) -> int:
+        return rhs.x if isinstance(rhs, ModInt) else rhs
+
+    def __add__(self, rhs) -> int:
+        return mod_add(self.x, self.rhs(rhs), self.mod)
+
+    def __iadd__(self, rhs) -> "ModInt":
+        self.x = self.__add__(rhs)
+
+        return self
+
+    def __sub__(self, rhs) -> int:
+        return mod_sub(self.x, self.rhs(rhs), self.mod)
+
+    def __isub__(self, rhs) -> "ModInt":
+        self.x = self.__sub__(rhs)
+
+        return self
+
+    def __mul__(self, rhs):
+        return mod_mul(self.x, self.rhs(rhs), self.mod)
+
+    def __imul__(self, rhs):
+        self.x = self.__mul__(rhs)
+
+        return self
+
+    def __truediv__(self, rhs):
+        return mod_div(self.x, self.rhs(rhs), self.mod)
+
+    def __itruediv__(self, rhs):
+        self.x = self.__truediv__(rhs)
+
+        return self
+
+    def __floordiv__(self, rhs):
+        return (self.x // self.rhs(rhs)) % self.mod
+
+    def __ifloordiv__(self, rhs):
+        self.x = self.__floordiv__(rhs)
+
+        return self
+
+    def __eq__(self, rhs) -> bool:
+        return self.rhs(rhs) == self.x
+
+    def __ne__(self, rhs) -> bool:
+        return self.rhs(rhs) != self.x
 
 
 # 標準入力関数
@@ -564,3 +630,19 @@ lowerlist = list("abcdefghijklmnopqrstuvwxyz")
 upperlist = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 # コード
+Q = ii()
+cur = ModInt(1)
+L = deque([1])
+
+for _ in [0] * Q:
+    l = il()
+
+    if l[0] == 1:
+        cur *= 10
+        cur += l[1]
+        L.append(l[1])
+    elif l[0] == 2:
+        t = ModInt(L.popleft()) * pow(10, len(L), cur.mod)
+        cur -= t
+    else:
+        print(cur.val())

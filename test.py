@@ -2,6 +2,7 @@ import unittest
 from libs.grid import coordinate_check, grid_moves
 from libs.math_func import is_prime, simple_sigma
 from libs.utils import lowerlist, upperlist, INF
+from libs.modint import mod_add, mod_sub
 
 
 class GridTests(unittest.TestCase):
@@ -60,6 +61,22 @@ class TestUtilsVariable(unittest.TestCase):
 
     def test_inf_value(self):
         self.assertEqual(1 << 63, INF)
+
+
+class TestModFunctions(unittest.TestCase):
+    def test_modadd(self):
+        test_cases = [(1, 1, 4, 2), (5, 5, 7, 3), (10, -5, 3, 2)]
+
+        for a, b, mod, ans in test_cases:
+            with self.subTest(a=a, b=b, mod=mod):
+                self.assertEqual(mod_add(a, b, mod), ans)
+
+    def test_modsub(self):
+        test_cases = [(3, 1, 4, 2), (1, 5, 3, 2), (15, 3, 2, 0)]
+
+        for a, b, mod, ans in test_cases:
+            with self.subTest(a=a, b=b, mod=mod):
+                self.assertEqual(mod_sub(a, b, mod), ans)
 
 
 if __name__ == "__main__":
