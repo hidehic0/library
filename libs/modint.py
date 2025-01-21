@@ -65,6 +65,9 @@ class ModInt:
 
         return self
 
+    def __pow__(self, rhs):
+        return pow(self.x, self.rhs(rhs), self.mod)
+
     def __eq__(self, rhs) -> bool:
         return self.rhs(rhs) == self.x
 
