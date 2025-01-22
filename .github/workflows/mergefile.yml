@@ -1,9 +1,7 @@
 name: run merge split files and format
 
 on:
-  pull_request:
-    types: 
-      - closed
+  push:
     branches:
       - main
 
