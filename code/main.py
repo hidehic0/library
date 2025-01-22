@@ -186,18 +186,35 @@ def binary_search(fn: Callable[[int], bool], right: int = 0, left: int = -1) -> 
 
 
 def mod_add(a: int, b: int, mod: int):
+    """
+    足し算してmodを取った値を出力
+    O(1)
+    """
     return (a + b) % mod
 
 
 def mod_sub(a: int, b: int, mod: int):
+    """
+    引き算してmodを取った値を出力
+    O(1)
+    """
     return (a - b) % mod
 
 
 def mod_mul(a: int, b: int, mod: int):
+    """
+    掛け算してmodを取った値を出力
+    O(1)
+    """
     return (a * b) % mod
 
 
 def mod_div(a: int, b: int, mod: int):
+    """
+    割り算してmodを取った値を出力
+    フェルマーの小定理を使って計算します
+    O(log mod)
+    """
     return (a * pow(b, mod - 2, mod)) % mod
 
 
