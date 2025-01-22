@@ -35,8 +35,6 @@ from typing import Any, List
 # pypyjit.set_param("max_unroll_recursion=-1")
 
 sys.setrecursionlimit(5 * 10**5)
-
-
 # 数学型関数
 def is_prime(n):
     if n == 1:
@@ -136,8 +134,6 @@ def simple_sigma(n: int) -> int:
     つまり和の公式
     """
     return (n * (n + 1)) // 2
-
-
 # 多次元配列作成
 from typing import List, Any
 
@@ -154,8 +150,6 @@ def create_array3(a: int, b: int, c: int, default: Any = 0) -> List[List[List[An
     ３次元配列を初期化する関数
     """
     return [[[default] * c for _ in [0] * b] for _ in [0] * a]
-
-
 from typing import Callable
 
 
@@ -183,8 +177,6 @@ def binary_search(fn: Callable[[int], bool], right: int = 0, left: int = -1) -> 
             right = mid
 
     return left
-
-
 def mod_add(a: int, b: int, mod: int):
     """
     足し算してmodを取った値を出力
@@ -277,8 +269,6 @@ class ModInt:
 
     def __ne__(self, rhs) -> bool:
         return self.rhs(rhs) != self.x
-
-
 # 標準入力関数
 import sys
 
@@ -306,8 +296,6 @@ def il(add_num: int = 0):
 # 複数行の入力をサポート
 def li(n: int, func, *args):
     return [func(*args) for _ in [0] * n]
-
-
 # YesNo関数
 def YesNoTemplate(state: bool, upper: bool = False) -> str:
     """
@@ -354,8 +342,6 @@ def NE(state: bool, upper: bool = False) -> bool | None:
 
     YN(False, upper)
     exit()
-
-
 def coordinate_check(x: int, y: int, H: int, W: int) -> bool:
     """
     座標がグリッドの範囲内にあるかチェックする関数
@@ -399,8 +385,6 @@ def grid_moves(
             res.append((nx, ny))
 
     return res
-
-
 # ac_libraryのメモ
 """
 segtree
@@ -520,8 +504,6 @@ class GraphW:
     def all(self):
         # グラフの内容をすべて出力
         return self.grath
-
-
 # UnionFind木
 class UnionFind:
     """
@@ -573,8 +555,6 @@ class UnionFind:
         self.data[ra] = da
         self.data[rb] = db
         return True
-
-
 # Trie木
 class Trie:
     class Data:
@@ -642,8 +622,6 @@ class Trie:
             result += self.data[childs[t]].count - 1
 
         return result
-
-
 # 便利変数
 INF = 1 << 63
 lowerlist = list("abcdefghijklmnopqrstuvwxyz")
