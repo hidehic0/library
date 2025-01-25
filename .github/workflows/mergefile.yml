@@ -1,64 +1,55 @@
 name: run merge split files and format
-
 on:
   push:
     branches:
       - main
-
 jobs:
-  merge_file:
+  main:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
-    - uses: actions/checkout@v4
-      with:
-        ref: ${{ github.head_ref }}
-
-
-    - name: merge split files
-      run: |
-        chmod +x ./merge_file.bash
-        ./merge_file.bash
-
-    - name: Auto Commit
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: Merge split file by actions
-
-  format_file:
-    runs-on: ubuntu-latest
-    needs: [merge_file]
-    permissions:
-      contents: write
-
-    steps:
-    - name: checkout
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ github.head_ref }}
-
-    - name: git pull
-      run: git pull
-
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.13'
-
-    - name: Check Python Version
-      run: python -V
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install ruff
-
-    - name: Run Ruff
-      run: ruff format .
-
-    - name: Auto Commit
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: Format File By Actions
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 2
+      - name: Import GPG Key
+        id: import-gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+      - name: merge split files
+        run: |
+          chmod +x ./merge_file.bash
+          ./merge_file.bash
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Check Python Version
+        run: python -V
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff
+      - name: Run Ruff
+        run: ruff format .
+      - name: Get last commit message
+        id: last-commit
+        run: |
+          echo "message=$(git log -1 --pretty=%s)" >> $GITHUB_OUTPUT
+          echo "author=$(git log -1 --pretty=\"%an <%ae>\")" >> $GITHUB_OUTPUT
+      - name: Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Merge split file by actions
+          commit_author: "${{ steps.import-gpg.outputs.name }} <${{ steps.import-gpg.outputs.email }}>"
+          commit_message: ${{ steps.last-commit.outputs.message }}
+          commit_user_name: ${{ steps.import-gpg.outputs.name }}
+          commit_user_email: ${{ steps.import-gpg.outputs.email }}
+          commit_options: '--amend --no-edit'
+          push_options: '--force'
+          skip_fetch: true
