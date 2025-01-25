@@ -42,6 +42,10 @@ class UnionFind:
         return True
 
     def rollback(self):
+        """
+        undoします
+        redoはありません
+        """
         if not self.hist:
             return False
 
