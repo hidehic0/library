@@ -43,6 +43,13 @@ def is_prime(n):
 
 
 def eratosthenes(n):
+    """
+    n以下の素数を列挙します
+    計算量は、O(n log log n)です
+    先程の素数判定法で列挙するよりも、少し速いです
+    列挙した素数は昇順に並んでいます
+    アルゴリズムはエラトステネスです
+    """
     primes = [True] * (n + 1)
     primes[0], primes[1] = False, False
     i = 2
@@ -57,7 +64,11 @@ def eratosthenes(n):
 
 
 def calc_divisors(N):
-    # 約数全列挙
+    """
+    Nの約数列挙します
+    計算量は、√Nです
+    約数は昇順に並んでいます
+    """
     import heapq
 
     result = []
@@ -77,7 +88,11 @@ def calc_divisors(N):
 
 
 def factorization(n):
-    # 素因数分解
+    """
+    nを素因数分解します
+    計算量は、√Nです(要改善)
+    複数回素因数分解を行なう場合は、√N以下の素数を列挙したので試し割りした法が速いです
+    """
     result = []
     tmp = n
     for i in range(2, int(-(-(n**0.5) // 1)) + 1):
@@ -98,7 +113,7 @@ def factorization(n):
 
 
 def simple_sigma(n: int) -> int:
-    r"""
+    """
     1からnまでの総和を求める関数
     つまり和の公式
     """
