@@ -47,7 +47,6 @@ jobs:
         with:
           commit_message: Merge split file by actions
           commit_author: "${{ steps.import-gpg.outputs.name }} <${{ steps.import-gpg.outputs.email }}>"
-          commit_message: ${{ steps.last-commit.outputs.message }}
           commit_user_name: ${{ steps.import-gpg.outputs.name }}
           commit_user_email: ${{ steps.import-gpg.outputs.email }}
           commit_options: '--amend --no-edit'
