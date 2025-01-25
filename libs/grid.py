@@ -25,6 +25,7 @@ def grid_moves(
     movesは移動する座標がいくつかを保存する
     check_funcsは、その座標の点が#だとかを自前で実装して判定はこちらでするみたいな感じ
     なおcheck_funcsは引数がxとyだけというのが条件
+    追加の判定関数は、弾く場合は、False それ以外ならTrueで
     """
     res = []
 
