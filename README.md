@@ -14,3 +14,4 @@
 </br></br>
 
 [![run unittest](https://github.com/hidehic0/library/actions/workflows/unittest.yml/badge.svg?branch=main)](https://github.com/hidehic0/library/actions/workflows/unittest.yml)
+[![CodeQL Advanced](https://github.com/hidehic0/library/actions/workflows/codeql.yml/badge.svg)](https://github.com/hidehic0/library/actions/workflows/codeql.yml)
