@@ -1,6 +1,6 @@
 import unittest
 from libs.grid import coordinate_check, grid_moves
-from libs.math_func import is_prime, simple_sigma
+from libs.math_func import is_prime, simple_sigma, eratosthenes
 from libs.utils import lowerlist, upperlist, INF
 from libs.modint import mod_add, mod_sub
 
@@ -38,6 +38,45 @@ class TestMathFunctions(unittest.TestCase):
         for i, ans in test_cases:
             with self.subTest(i=i):
                 self.assertEqual(is_prime(i), ans)
+
+    def test_eratosthenes(self):
+        testcases = [
+            (
+                100,
+                [
+                    2,
+                    3,
+                    5,
+                    7,
+                    11,
+                    13,
+                    17,
+                    19,
+                    23,
+                    29,
+                    31,
+                    37,
+                    41,
+                    43,
+                    47,
+                    53,
+                    59,
+                    61,
+                    67,
+                    71,
+                    73,
+                    79,
+                    83,
+                    89,
+                    97,
+                ],
+            ),
+            (3, [2, 3]),
+        ]
+
+        for n, ans in testcases:
+            with self.subTest(n=n):
+                self.assertEqual(eratosthenes(n), ans)
 
     def test_simple_sigma(self):
         test_cases = [
