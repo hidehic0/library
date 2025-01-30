@@ -81,25 +81,26 @@ def is_prime(n):
     return True
 
 
-def eratosthenes(n):
+def eratosthenes(n: int) -> List[int]:
     """
     n以下の素数を列挙します
-    計算量は、O(n log log n)です
-    先程の素数判定法で列挙するよりも、少し速いです
-    列挙した素数は昇順に並んでいます
-    アルゴリズムはエラトステネスです
+    計算量は、O(N)です
+    アルゴリズムは、線形篩です
     """
-    primes = [True] * (n + 1)
-    primes[0], primes[1] = False, False
-    i = 2
-    while i**2 <= n:
-        if primes[i]:
-            for k in range(i * 2, n + 1, i):
-                primes[k] = False
+    res = []
+    lsf = [None] * (n + 1)
 
-        i += 1
+    for i in range(2, n + 1):
+        if lsf[i] is None:
+            lsf[i] = i
+            res.append(i)
 
-    return [i for i, p in enumerate(primes) if p]
+        for p in res:
+            if p * i > n or p > lsf[i]:
+                break
+            lsf[p * i] = p
+
+    return res
 
 
 def calc_divisors(N):
