@@ -31,3 +31,11 @@ def manhattan_45turn(x: int, y: int) -> Tuple[int]:
     res_y = x + y
 
     return res_x, res_y
+
+
+def chebyshev_dis(x1: int, y1: int, x2: int, y2: int) -> int:
+    """
+    チェビシェフ距離を計算します
+    """
+
+    return max(abs(x1 - x2), abs(y1 - y2))
