@@ -69,8 +69,6 @@ def calc_divisors(N):
     計算量は、√Nです
     約数は昇順に並んでいます
     """
-    import heapq
-
     result = []
 
     for i in range(1, N + 1):
@@ -80,11 +78,11 @@ def calc_divisors(N):
         if N % i != 0:
             continue
 
-        heapq.heappush(result, i)
+        result.append(i)
         if N // i != i:
-            heapq.heappush(result, N // i)
+            result.append(N // i)
 
-    return result
+    return sorted(result)
 
 
 def factorization(n):
