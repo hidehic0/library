@@ -50,17 +50,17 @@ def eratosthenes(n):
     列挙した素数は昇順に並んでいます
     アルゴリズムはエラトステネスです
     """
-    primes = [True] * (n + 1)
-    primes[0], primes[1] = False, False
+    primes = set(list(range(2, n + 1)))
     i = 2
     while i**2 <= n:
-        if primes[i]:
+        if i in primes:
             for k in range(i * 2, n + 1, i):
-                primes[k] = False
+                if k in primes:
+                    primes.remove(k)
 
         i += 1
 
-    return [i for i, p in enumerate(primes) if p]
+    return list(primes)
 
 
 def calc_divisors(N):
