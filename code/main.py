@@ -35,6 +35,7 @@ from typing import Any, List
 # pypyjit.set_param("max_unroll_recursion=-1")
 
 sys.setrecursionlimit(5 * 10**5)
+from typing import List
 
 
 # 数学型関数
@@ -149,6 +150,42 @@ def factorization(n):
     return result
 
 
+def factorization_plural(L: List[int]) -> List[List[int]]:
+    """
+    複数の数の素因数分解を行ないます
+    計算量は、O(N * (√max(L) log log √max(L)))
+    みたいな感じです
+
+    最初に素数を列挙するため、普通の素因数分解より効率がいいです
+    """
+    res = []
+    primes = eratosthenes(int(max(L) ** 0.5) + 20)
+
+    def solve(n):
+        t = []
+        for p in primes:
+            if n % p == 0:
+                cnt = 0
+                while n % p == 0:
+                    cnt += 1
+                    n //= p
+
+                t.append([p, cnt])
+
+        if n != 1:
+            t.append([n, 1])
+
+        if t == []:
+            t.append([n, 1])
+
+        return t
+
+    for n in L:
+        res.append(solve(n))
+
+    return res
+
+
 def simple_sigma(n: int) -> int:
     """
     1からnまでの総和を求める関数
@@ -158,7 +195,7 @@ def simple_sigma(n: int) -> int:
 
 
 # 多次元配列作成
-from typing import List, Any
+from typing import Any, List
 
 
 def create_array2(a: int, b: int, default: Any = 0) -> List[List[Any]]:

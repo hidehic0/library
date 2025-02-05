@@ -1,3 +1,6 @@
+from typing import List
+
+
 # 数学型関数
 def is_prime(n):
     """
@@ -108,6 +111,42 @@ def factorization(n):
         result.append([n, 1])
 
     return result
+
+
+def factorization_plural(L: List[int]) -> List[List[int]]:
+    """
+    複数の数の素因数分解を行ないます
+    計算量は、O(N * (√max(L) log log √max(L)))
+    みたいな感じです
+
+    最初に素数を列挙するため、普通の素因数分解より効率がいいです
+    """
+    res = []
+    primes = eratosthenes(int(max(L) ** 0.5) + 20)
+
+    def solve(n):
+        t = []
+        for p in primes:
+            if n % p == 0:
+                cnt = 0
+                while n % p == 0:
+                    cnt += 1
+                    n //= p
+
+                t.append([p, cnt])
+
+        if n != 1:
+            t.append([n, 1])
+
+        if t == []:
+            t.append([n, 1])
+
+        return t
+
+    for n in L:
+        res.append(solve(n))
+
+    return res
 
 
 def simple_sigma(n: int) -> int:
