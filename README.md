@@ -1,5 +1,9 @@
 # hidehic0's library
 
+[![run unittest](https://github.com/hidehic0/library/actions/workflows/unittest.yml/badge.svg?branch=main)](https://github.com/hidehic0/library/actions/workflows/unittest.yml)
+[![CodeQL Advanced](https://github.com/hidehic0/library/actions/workflows/codeql.yml/badge.svg)](https://github.com/hidehic0/library/actions/workflows/codeql.yml)
+</br>
+
 [![total lines](https://tokei.rs/b1/github/hidehic0/library)](https://github.com/XAMPPRocky/tokei)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hidehic0/library)
 ![GitHub repo size](https://img.shields.io/github/repo-size/hidehic0/library)
@@ -13,5 +17,3 @@
 ファイルは、分割したのは、libsに、全文はcodeに、置いてあります</br>
 </br></br>
 
-[![run unittest](https://github.com/hidehic0/library/actions/workflows/unittest.yml/badge.svg?branch=main)](https://github.com/hidehic0/library/actions/workflows/unittest.yml)
-[![CodeQL Advanced](https://github.com/hidehic0/library/actions/workflows/codeql.yml/badge.svg)](https://github.com/hidehic0/library/actions/workflows/codeql.yml)
