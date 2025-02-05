@@ -1,6 +1,6 @@
 import unittest
 from libs.grid import coordinate_check, grid_moves
-from libs.math_func import is_prime, simple_sigma
+from libs.math_func import is_prime, simple_sigma, factorization_plural
 from libs.utils import lowerlist, upperlist, INF
 from libs.modint import mod_add, mod_sub
 
@@ -50,6 +50,13 @@ class TestMathFunctions(unittest.TestCase):
         for i, ans in test_cases:
             with self.subTest(i=i):
                 self.assertEqual(simple_sigma(i), ans)
+
+    def test_factorization_plural(self):
+        test_cases = [([5, 10], [[[5, 1]], [[2, 1], [5, 1]]])]
+
+        for l, ans in test_cases:
+            with self.subTest(l=l):
+                self.assertEqual(factorization_plural(l), ans)
 
 
 class TestUtilsVariable(unittest.TestCase):
