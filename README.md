@@ -29,3 +29,35 @@
 |約数列挙|√N以下の数で試し割り|$`O(\sqrt N)`$||
 |1からNまでの総和|和の公式|$`O(1)`$|いつも忘れてしまうので関数化した|
 
+### [数列作成](libs/array_create.py)
+二次元配列、三次元配列を作成できます</br>
+ただのスニペットです
+
+### [二分探索](libs/binary_search.py)
+二分探索を関数化しただけ
+
+### [ModInt](libs/modint.py)
+ModIntのクラス</br>
+加算、減算、乗算は、$`O(1)`$</br>
+除算は、$`O(\log MOD)`$</br>
+べき乗は、$O(\log b)$
+
+### [標準入力](libs/standard_input.py)
+普通です
+
+### [YesNo関数](libs/yn_func.py)
+特色は、YesまたはNoを出力して、exitする関数ぐらいです
+
+### [グリッド関数](libs/grid.py)
+* 座標がグリッドの中にあるか判定する関数
+* 次に行ける場所を列挙する関数
+
+### [グラフのオブジェクト](libs/grath.py)
+スペルミスに気づいた</br>
+標準入力で、辺を追加する関数がある
+
+### [UnionFind](libs/unionfind.py)
+いつ使うかも、分からないrollback機能がある
+
+### [trie木](libs/trie.py)
+いつか使う時が来ると、信じたい
