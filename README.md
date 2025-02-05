@@ -40,7 +40,7 @@
 ModIntのクラス</br>
 加算、減算、乗算は、$`O(1)`$</br>
 除算は、$`O(\log MOD)`$</br>
-べき乗は、$O(\log b)$
+べき乗は、$`O(\log b)`$
 
 ### [標準入力](libs/standard_input.py)
 普通です
