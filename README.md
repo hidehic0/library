@@ -61,3 +61,7 @@ ModIntのクラス</br>
 
 ### [trie木](libs/trie.py)
 いつか使う時が来ると、信じたい
+
+### [BIT](libs/bit.py)
+binary indexed tree</br>
+累積和よりよさそう
