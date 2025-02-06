@@ -19,6 +19,7 @@ cat libs/memo.py >>code/main.py
 cat libs/grath.py >>code/main.py
 cat libs/unionfind.py >>code/main.py
 cat libs/trie.py >>code/main.py
+cat libs/bit.py >>code/main.py
 cat libs/dis.py >>code/main.py
 cat libs/utils.py >>code/main.py
 
