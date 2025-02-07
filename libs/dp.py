@@ -48,3 +48,19 @@ def knapsack_dp(lis: List[List[int]], W: int) -> List[int]:
             dp[w + k] = max(dp[w + k], dp[k] + v)
 
     return dp
+
+
+def article_breakdown(lis: List[List[int]]) -> List[List[int]]:
+    """
+    個数制限付きナップサックの品物を分解します
+    個数の値が、各品物の一番右にあれば正常に動作します
+    """
+    res = []
+    for w, v, c in lis:
+        k = 1
+        while c > 0:
+            res.append([w * k, v * k])
+            c -= k
+            k = min(2 * k, c)
+
+    return res
