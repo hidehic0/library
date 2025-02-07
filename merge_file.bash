@@ -15,6 +15,7 @@ cat libs/modint.py >>code/main.py
 cat libs/standard_input.py >>code/main.py
 cat libs/yn_func.py >>code/main.py
 cat libs/grid.py >>code/main.py
+cat libs/dp.py >>code/main.py
 cat libs/memo.py >>code/main.py
 cat libs/grath.py >>code/main.py
 cat libs/unionfind.py >>code/main.py
