@@ -13,22 +13,22 @@ function add_code() {
   cat $lib_path >>code/main.py
 }
 
-cat libs/import.py >>code/main.py
-cat libs/math_func.py >>code/main.py
-cat libs/array_create.py >>code/main.py
-cat libs/binary_search.py >>code/main.py
-cat libs/modint.py >>code/main.py
-cat libs/standard_input.py >>code/main.py
-cat libs/yn_func.py >>code/main.py
-cat libs/grid.py >>code/main.py
-cat libs/dp.py >>code/main.py
-cat libs/memo.py >>code/main.py
-cat libs/grath.py >>code/main.py
-cat libs/unionfind.py >>code/main.py
-cat libs/trie.py >>code/main.py
-cat libs/bit.py >>code/main.py
-cat libs/dis.py >>code/main.py
-cat libs/utils.py >>code/main.py
+add_code "import.py"
+add_code "math_func.py"
+add_code "array_create.py"
+add_code "binary_search.py"
+add_code "modint.py"
+add_code "standard_input.py"
+add_code "yn_func.py"
+add_code "grid.py"
+add_code "dp.py"
+add_code "memo.py"
+add_code "grath.py"
+add_code "unionfind.py"
+add_code "trie.py"
+add_code "bit.py"
+add_code "dis.py"
+add_code "utils.py"
 
 echo "作業完了"
 
