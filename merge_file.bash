@@ -7,6 +7,12 @@ echo "新しいmain.py作成完了"
 # テンプレ
 # /bin/cat python/<filename>.py >> code/main.py
 
+function add_code() {
+  local lib_path
+  lib_path="libs/${1}"
+  cat $lib_path >>code/main.py
+}
+
 cat libs/import.py >>code/main.py
 cat libs/math_func.py >>code/main.py
 cat libs/array_create.py >>code/main.py
