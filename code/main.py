@@ -194,6 +194,32 @@ def simple_sigma(n: int) -> int:
     return (n * (n + 1)) // 2
 
 
+def comb(n: int, r: int, mod: int | None = None) -> int:
+    """
+    高速なはずの二項係数
+    modを指定すれば、mod付きになる
+    """
+    a = 1
+
+    for i in range(n - r + 1, n + 1):
+        a *= i
+
+        if mod:
+            a %= mod
+
+    b = 1
+
+    for i in range(1, r + 1):
+        b *= i
+        if mod:
+            b %= mod
+
+    if mod:
+        return a * pow(b, -1, mod) % mod
+    else:
+        return a * b
+
+
 # 多次元配列作成
 from typing import Any, List
 
