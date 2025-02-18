@@ -27,7 +27,7 @@ class BIT:
 
         return res
 
-    def interval_sum(self, l: int, r: int) -> None:
+    def interval_sum(self, l: int, r: int) -> int:
         """
         lからrまでの総和を求められます
         lは0-indexedで、rは1-indexedにしてください
