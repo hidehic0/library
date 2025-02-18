@@ -1,5 +1,5 @@
 [tools]
-python = "pypy3.10-7.3.12"
+python = "3.13.2"
 
 [tasks]
 test = "python3 -m unittest test.py"
