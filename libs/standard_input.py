@@ -1,36 +1,37 @@
 # 標準入力関数
 import sys
+from typing import Any, List
 
 
-def s():
+def s() -> str:
     """
     一行に一つのstringをinput
     """
     return sys.stdin.readline().rstrip()
 
 
-def sl():
+def sl() -> List[str]:
     """
     一行に複数のstringをinput
     """
     return s().split()
 
 
-def ii():
+def ii() -> int:
     """
     一つのint
     """
     return int(s())
 
 
-def il(add_num: int = 0):
+def il(add_num: int = 0) -> List[int]:
     """
     一行に複数のint
     """
     return list(map(lambda i: int(i) + add_num, sl()))
 
 
-def li(n: int, func, *args):
+def li(n: int, func, *args) -> List[List[Any]]:
     """
     複数行の入力をサポート
     """
