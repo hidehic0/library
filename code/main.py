@@ -39,7 +39,7 @@ from typing import List
 
 
 # 数学型関数
-def is_prime(n):
+def is_prime(n: int) -> int:
     """
     素数判定します
     計算量は定数時間です。正確には、繰り返し二乗法の計算量によりです
@@ -82,7 +82,7 @@ def is_prime(n):
     return True
 
 
-def eratosthenes(n):
+def eratosthenes(n: int) -> List[int]:
     """
     n以下の素数を列挙します
     計算量は、O(n log log n)です
@@ -103,7 +103,7 @@ def eratosthenes(n):
     return [i for i, p in enumerate(primes) if p]
 
 
-def calc_divisors(N):
+def calc_divisors(n: int):
     """
     Nの約数列挙します
     計算量は、√Nです
@@ -111,21 +111,21 @@ def calc_divisors(N):
     """
     result = []
 
-    for i in range(1, N + 1):
-        if i * i > N:
+    for i in range(1, n + 1):
+        if i * i > n:
             break
 
-        if N % i != 0:
+        if n % i != 0:
             continue
 
         result.append(i)
-        if N // i != i:
-            result.append(N // i)
+        if n // i != i:
+            result.append(n // i)
 
     return sorted(result)
 
 
-def factorization(n):
+def factorization(n: int) -> List[List[int]]:
     """
     nを素因数分解します
     計算量は、√Nです(要改善)
@@ -150,7 +150,7 @@ def factorization(n):
     return result
 
 
-def factorization_plural(L: List[int]) -> List[List[int]]:
+def factorization_plural(L: List[int]) -> List[List[List[int]]]:
     """
     複数の数の素因数分解を行ないます
     計算量は、O(N * (√max(L) log log √max(L)))
@@ -248,7 +248,9 @@ def create_array3(a: int, b: int, c: int, default: Any = 0) -> List[List[List[An
 from typing import Callable
 
 
-def binary_search(fn: Callable[[int], bool], right: int = 0, left: int = -1) -> int:
+def binary_search(
+    fn: Callable[[int], bool], right: int = 0, left: int = -1, return_left: bool = True
+) -> int:
     """
     二分探索の抽象的なライブラリ
     評価関数の結果に応じて、二分探索する
@@ -271,7 +273,7 @@ def binary_search(fn: Callable[[int], bool], right: int = 0, left: int = -1) -> 
         else:
             right = mid
 
-    return left
+    return left if return_left else right
 
 
 def mod_add(a: int, b: int, mod: int):
@@ -370,37 +372,38 @@ class ModInt:
 
 # 標準入力関数
 import sys
+from typing import Any, List
 
 
-def s():
+def s() -> str:
     """
     一行に一つのstringをinput
     """
     return sys.stdin.readline().rstrip()
 
 
-def sl():
+def sl() -> List[str]:
     """
     一行に複数のstringをinput
     """
     return s().split()
 
 
-def ii():
+def ii() -> int:
     """
     一つのint
     """
     return int(s())
 
 
-def il(add_num: int = 0):
+def il(add_num: int = 0) -> List[int]:
     """
     一行に複数のint
     """
     return list(map(lambda i: int(i) + add_num, sl()))
 
 
-def li(n: int, func, *args):
+def li(n: int, func, *args) -> List[List[Any]]:
     """
     複数行の入力をサポート
     """
@@ -591,16 +594,29 @@ vは配列の長さまたは、初期化する内容
 from collections import deque
 from typing import List
 
+from typing_extensions import Tuple
+
 
 class Graph:
+    """
+    グラフ構造体
+    """
+
     def __init__(self, N: int, dire: bool = False) -> None:
+        """
+        Nは頂点数、direは有向グラフかです
+        """
         self.N = N
         self.dire = dire
         self.grath = [[] for _ in [0] * self.N]
         self.in_deg = [0] * N
 
     def new_side(self, a: int, b: int):
-        # 注意　0-indexedが前提
+        """
+        注意　0-indexedが前提
+        aとbを辺で繋ぎます
+        有向グラフなら、aからbだけ、無向グラフなら、aからbと、bからaを繋ぎます
+        """
         self.grath[a].append(b)
         if self.dire:
             self.in_deg[b] += 1
@@ -609,24 +625,39 @@ class Graph:
             self.grath[b].append(a)
 
     def side_input(self):
-        # 新しい辺をinput
+        """
+        標準入力で、新しい辺を追加します
+        """
         a, b = map(lambda x: int(x) - 1, input().split())
         self.new_side(a, b)
 
     def input(self, M: int):
-        # 複数行の辺のinput
+        """
+        標準入力で複数行受け取り、各行の内容で辺を繋ぎます
+        """
         for _ in [0] * M:
             self.side_input()
 
     def get(self, a: int):
-        # 頂点aの隣接点を出力
+        """
+        頂点aの隣接頂点を出力します
+        """
         return self.grath[a]
 
-    def all(self):
-        # グラフの内容をすべて出力
+    def all(self) -> List[List[int]]:
+        """
+        グラフの隣接リストをすべて出力します
+        """
         return self.grath
 
-    def topological(self, unique: bool = False):
+    def topological(self, unique: bool = False) -> List[int]:
+        """
+        トポロジカルソートします
+        有向グラフ限定です
+
+        引数のuniqueは、トポロジカルソート結果が、一意に定まらないとエラーを吐きます
+        閉路がある、または、uniqueがTrueで一意に定まらなかった時は、[-1]を返します
+        """
         if not self.dire:
             raise ValueError("グラフが有向グラフでは有りません (╥﹏╥)")
 
@@ -658,35 +689,50 @@ class Graph:
             return [x for x in order]
 
 
-# 重み付きグラフ
 class GraphW:
+    """
+    重み付きグラフ
+    """
+
     def __init__(self, N: int, dire: bool = False) -> None:
         self.N = N
         self.dire = dire
         self.grath = [[] for _ in [0] * self.N]
 
     def new_side(self, a: int, b: int, w: int):
-        # 注意　0-indexedが前提
+        """
+        注意　0-indexedが前提
+        aとbを辺で繋ぎます
+        有向グラフなら、aからbだけ、無向グラフなら、aからbと、bからaを繋ぎます
+        """
         self.grath[a].append((b, w))
         if not self.dire:
             self.grath[b].append((a, w))
 
     def side_input(self):
-        # 新しい辺をinput
+        """
+        標準入力で、新しい辺を追加します
+        """
         a, b, w = map(lambda x: int(x) - 1, input().split())
         self.new_side(a, b, w + 1)
 
     def input(self, M: int):
-        # 複数行の辺のinput
+        """
+        標準入力で複数行受け取り、各行の内容で辺を繋ぎます
+        """
         for _ in [0] * M:
             self.side_input()
 
-    def get(self, a: int):
-        # 頂点aの隣接点を出力
+    def get(self, a: int) -> List[Tuple[int]]:
+        """
+        頂点aの隣接頂点を出力します
+        """
         return self.grath[a]
 
-    def all(self):
-        # グラフの内容をすべて出力
+    def all(self) -> List[List[Tuple[int]]]:
+        """
+        グラフの隣接リストをすべて出力します
+        """
         return self.grath
 
 
@@ -704,17 +750,24 @@ class UnionFind:
         self.hist = []
 
     def root(self, vtx: int) -> int:
+        """
+        頂点vtxの親を出力します
+        """
         if self.data[vtx] < 0:
             return vtx
 
         return self.root(self.data[vtx])
 
     def same(self, a: int, b: int):
+        """
+        aとbが連結しているかどうか判定します
+        """
         return self.root(a) == self.root(b)
 
     def unite(self, a: int, b: int) -> bool:
         """
-        rootが同じでも、履歴には追加する
+        aとbを結合します
+        rootが同じでも、履歴には追加します
         """
         ra, rb = self.root(a), self.root(b)
 
@@ -845,7 +898,7 @@ class BIT:
 
         return res
 
-    def interval_sum(self, l: int, r: int) -> None:
+    def interval_sum(self, l: int, r: int) -> int:
         """
         lからrまでの総和を求められます
         lは0-indexedで、rは1-indexedにしてください
