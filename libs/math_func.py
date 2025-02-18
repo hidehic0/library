@@ -2,7 +2,7 @@ from typing import List
 
 
 # 数学型関数
-def is_prime(n):
+def is_prime(n: int) -> int:
     """
     素数判定します
     計算量は定数時間です。正確には、繰り返し二乗法の計算量によりです
@@ -45,7 +45,7 @@ def is_prime(n):
     return True
 
 
-def eratosthenes(n):
+def eratosthenes(n: int) -> List[int]:
     """
     n以下の素数を列挙します
     計算量は、O(n log log n)です
@@ -66,7 +66,7 @@ def eratosthenes(n):
     return [i for i, p in enumerate(primes) if p]
 
 
-def calc_divisors(N):
+def calc_divisors(n: int):
     """
     Nの約数列挙します
     計算量は、√Nです
@@ -74,21 +74,21 @@ def calc_divisors(N):
     """
     result = []
 
-    for i in range(1, N + 1):
-        if i * i > N:
+    for i in range(1, n + 1):
+        if i * i > n:
             break
 
-        if N % i != 0:
+        if n % i != 0:
             continue
 
         result.append(i)
-        if N // i != i:
-            result.append(N // i)
+        if n // i != i:
+            result.append(n // i)
 
     return sorted(result)
 
 
-def factorization(n):
+def factorization(n: int) -> List[List[int]]:
     """
     nを素因数分解します
     計算量は、√Nです(要改善)
@@ -113,7 +113,7 @@ def factorization(n):
     return result
 
 
-def factorization_plural(L: List[int]) -> List[List[int]]:
+def factorization_plural(L: List[int]) -> List[List[List[int]]]:
     """
     複数の数の素因数分解を行ないます
     計算量は、O(N * (√max(L) log log √max(L)))
