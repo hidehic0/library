@@ -12,17 +12,24 @@ class UnionFind:
         self.hist = []
 
     def root(self, vtx: int) -> int:
+        """
+        頂点vtxの親を出力します
+        """
         if self.data[vtx] < 0:
             return vtx
 
         return self.root(self.data[vtx])
 
     def same(self, a: int, b: int):
+        """
+        aとbが連結しているかどうか判定します
+        """
         return self.root(a) == self.root(b)
 
     def unite(self, a: int, b: int) -> bool:
         """
-        rootが同じでも、履歴には追加する
+        aとbを結合します
+        rootが同じでも、履歴には追加します
         """
         ra, rb = self.root(a), self.root(b)
 

@@ -1,7 +1,9 @@
 from typing import Callable
 
 
-def binary_search(fn: Callable[[int], bool], right: int = 0, left: int = -1) -> int:
+def binary_search(
+    fn: Callable[[int], bool], right: int = 0, left: int = -1, return_left: bool = True
+) -> int:
     """
     二分探索の抽象的なライブラリ
     評価関数の結果に応じて、二分探索する
@@ -24,4 +26,4 @@ def binary_search(fn: Callable[[int], bool], right: int = 0, left: int = -1) -> 
         else:
             right = mid
 
-    return left
+    return left if return_left else right
