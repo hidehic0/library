@@ -1,8 +1,7 @@
 # グラフ構造
 # 無向グラフ
 from collections import deque
-from typing import List
-from typing_extensions import Tuple
+from typing import List, Tuple
 
 
 class Graph:
