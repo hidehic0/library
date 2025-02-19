@@ -1,3 +1,7 @@
+from typing import List
+from collections import defaultdict
+
+
 # UnionFind木
 class UnionFind:
     """
@@ -60,3 +64,16 @@ class UnionFind:
         self.data[ra] = da
         self.data[rb] = db
         return True
+
+    def all(self) -> List[List[int]]:
+        D = defaultdict(list)
+
+        for i in range(self.size):
+            D[self.root(i)].append(i)
+
+        res = []
+
+        for l in D.values():
+            res.append(l)
+
+        return res
