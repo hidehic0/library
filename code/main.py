@@ -592,9 +592,7 @@ vは配列の長さまたは、初期化する内容
 # グラフ構造
 # 無向グラフ
 from collections import deque
-from typing import List
-
-from typing_extensions import Tuple
+from typing import List, Tuple
 
 
 class Graph:
@@ -736,6 +734,10 @@ class GraphW:
         return self.grath
 
 
+from collections import defaultdict
+from typing import List
+
+
 # UnionFind木
 class UnionFind:
     """
@@ -798,6 +800,19 @@ class UnionFind:
         self.data[ra] = da
         self.data[rb] = db
         return True
+
+    def all(self) -> List[List[int]]:
+        D = defaultdict(list)
+
+        for i in range(self.size):
+            D[self.root(i)].append(i)
+
+        res = []
+
+        for l in D.values():
+            res.append(l)
+
+        return res
 
 
 # Trie木
