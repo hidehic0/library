@@ -16,13 +16,15 @@ r"""
 # ライブラリと関数と便利変数
 # ライブラリ
 import bisect
+import copy
 import heapq
+import math
 import sys
-import unittest
 from collections import Counter, defaultdict, deque
-from itertools import permutations
+from itertools import accumulate, combinations, permutations
 from math import gcd, lcm, pi
-from typing import Any, List
+from operator import itemgetter
+from typing import Any, List, Tuple
 
 # from atcoder.segtree import SegTree
 # from atcoder.lazysegtree import LazySegTree
