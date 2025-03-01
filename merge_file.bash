@@ -8,7 +8,7 @@ echo "新しいmain.py作成完了"
 # /bin/cat python/<filename>.py >> code/main.py
 
 lib_path
-for file_name in "import.py" "math_func.py" "array_create.py" "binary_search.py" "modint.py" "standard_input.py" "yn_func.py" "grid.py" "dp.py" "memo.py" "graph.py" "unionfind.py" "trie.py" "bit.py" "dis.py" "utils.py"; do
+for file_name in "import.py" "math_func.py" "array_create.py" "binary_search.py" "modint.py" "standard_input.py" "yn_func.py" "grid.py" "dp.py" "coordinate_compression.py" "memo.py" "graph.py" "unionfind.py" "trie.py" "bit.py" "dis.py" "utils.py"; do
   lib_path="libs/${file_name}"
   cat $lib_path >>code/main.py
 done
