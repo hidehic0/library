@@ -3,6 +3,7 @@ from libs.grid import coordinate_check, grid_moves
 from libs.math_func import is_prime, simple_sigma, factorization_plural
 from libs.utils import lowerlist, upperlist, INF
 from libs.modint import mod_add, mod_sub
+from libs.coordinate_compression import coordinate_compression
 
 
 class GridTests(unittest.TestCase):
@@ -84,6 +85,18 @@ class TestModFunctions(unittest.TestCase):
         for a, b, mod, ans in test_cases:
             with self.subTest(a=a, b=b, mod=mod):
                 self.assertEqual(mod_sub(a, b, mod), ans)
+
+
+class TestCoordinateCompression(unittest.TestCase):
+    def test_coordinate_compression(self):
+        test_cases = [
+            ((8, 100, 33, 12, 6, 1211), [1, 4, 3, 2, 0, 5]),
+            ((5, 5, 5, 5, 5, 5), [0, 0, 0, 0, 0, 0]),
+        ]
+
+        for lis, ans in test_cases:
+            with self.subTest(lis=lis):
+                self.assertEqual(coordinate_compression(lis), ans)
 
 
 if __name__ == "__main__":
