@@ -70,3 +70,8 @@ ModIntのクラス</br>
 ### [BIT](libs/bit.py)
 binary indexed tree</br>
 累積和よりよさそう
+
+### [座標圧縮](libs/coordinate_compression.py)
+
+座標圧縮</br>
+一次元のしか揃えてない
