@@ -27,27 +27,25 @@ def partial_sum_dp(lis: List[int], X: int) -> List[bool]:
     return dp
 
 
-def knapsack_dp(lis: List[List[int]], W: int) -> List[int]:
+def knapsack_dp(lis: list[list[int]], W: int) -> int:
     """
-    ナップサックdpのテンプレート
-    lisは品物のリスト
-    原則品物は、w,vの形で与えられ、wが重さ、vが価値、となる
-    価値と重さを逆転させたい場合は自分でやってください
-    dp配列は、定数倍高速化のため、一次元配列として扱う
-    dp配列の長さは、Wとします
+    ナップサック問題を一次元DPで解く
+    lis: 品物のリスト [[重さ, 価値], ...]
+    W: ナップサックの容量
+    戻り値: 最大価値
     """
+    if W < 0 or not lis:
+        return 0
 
-    dp = [-(1 << 63)] * (W + 1)
-    dp[0] = 0
+    dp = [0] * (W + 1)
 
     for w, v in lis:
-        for k in reversed(range(len(dp))):
-            if w + k >= len(dp):
-                continue
+        if w < 0 or v < 0:
+            raise ValueError("Weight and value must be non-negative")
+        for k in reversed(range(W - w + 1)):
+            dp[k + w] = max(dp[k + w], dp[k] + v)
 
-            dp[w + k] = max(dp[w + k], dp[k] + v)
-
-    return dp
+    return dp[W]
 
 
 def article_breakdown(lis: List[List[int]]) -> List[List[int]]:
