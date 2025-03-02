@@ -27,6 +27,7 @@ jobs:
           output-path: verify_files.json
           include: |
             libs/
+            tests/
           exclude: |
             .github/
             code/
