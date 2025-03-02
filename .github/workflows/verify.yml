@@ -31,7 +31,10 @@ jobs:
           include: |
             libs/
           exclude: |
-            *
+            .github/
+            code/
+            test.py
+            tests
           # If you have config.toml
           # config: .verify-helper/config.toml
       - name: Upload verify_files.json
@@ -53,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [setup]
     env:
-      SPLIT_SIZE: "20"
+      SPLIT_SIZE: "3"
     strategy:
       matrix:
         # prettier-ignore
