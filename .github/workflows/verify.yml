@@ -31,7 +31,6 @@ jobs:
             .github/
             code/
             test.py
-            tests
       - name: Upload verify_files.json
         uses: competitive-verifier/actions/upload-verify-artifact@v2
         with:
