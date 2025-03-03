@@ -6,4 +6,4 @@ plugins:
   - jekyll-remote-theme
 lang: ja
 timezone: Asia/Tokyo
-theme: jekyll-theme-minima
+theme: minima
