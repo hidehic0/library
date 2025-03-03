@@ -13,5 +13,5 @@ for i in range(1, len(acc)):
 while True:
     try:
         print(acc[ii()])
-    except EOFError:
+    except:
         break
