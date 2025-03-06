@@ -40,18 +40,3 @@ def dijkstra(
         return used
     else:
         return used, prev
-
-
-def dijkstra_getpath(prev_lis: List[int], goal_point: int) -> List[int]:
-    """
-    dijkstraの経路復元をします
-    先述のdijkstra関数で、output_prevをTrueにして返ってきた、prevを引数として用います
-    """
-    res = []
-    cur = goal_point
-
-    while cur != -1:
-        res.append(cur)
-        cur = prev_lis[cur]
-
-    return res[::-1]
