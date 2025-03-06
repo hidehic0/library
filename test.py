@@ -1,3 +1,4 @@
+# competitive-verifier: UNITTEST PYTHON_UNITTEST_RESULT
 import unittest
 from libs.grid import coordinate_check, grid_moves
 from libs.math_func import is_prime, simple_sigma, factorization_plural

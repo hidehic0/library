@@ -19,6 +19,11 @@ jobs:
         uses: competitive-verifier/actions/setup@v2
         with:
           cache-pip: true
+      - name: python unittest
+        id: python-unittest
+        continue-on-error: true
+        run: |
+          python test.py
       - name: oj-resolve
         uses: competitive-verifier/actions/oj-resolve@v2
         with:
@@ -26,10 +31,12 @@ jobs:
           include: |
             libs/
             tests/
+            test.py
           exclude: |
             .github/
             code/
-            test.py
+        env:
+          PYTHON_UNITTEST_RESULT: ${{ steps.python-unittest.outcome == 'success' }}
       - name: Upload verify_files.json
         uses: competitive-verifier/actions/upload-verify-artifact@v2
         with:
