@@ -1,5 +1,6 @@
 # competitive-verifier: PROBLEM https://judge.yosupo.jp/problem/shortest_path
-from libs.dijkstra import dijkstra, dijkstra_getpath
+from libs.dijkstra import dijkstra
+from libs.get_path import getpath
 from libs.graph import GraphW
 from libs.standard_input import il
 from libs.utils import INF
@@ -16,7 +17,7 @@ used, prev = dijkstra(G.all(), S, True)
 if used[T] == INF:
     print(-1)
 else:
-    path = dijkstra_getpath(prev, T)
+    path = getpath(prev, T)
 
     print(used[T], len(path) - 1)
 
