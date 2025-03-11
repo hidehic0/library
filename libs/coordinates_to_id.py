@@ -17,8 +17,8 @@ def coordinates_to_id(H: int, W: int) -> Tuple[List[List[int]], List[Tuple[int]]
 
     for x in range(H):
         for y in range(W):
-            CtI[x][y] = i
-            ItC[i] = (x, y)
+            ItC[x][y] = i
+            CtI[i] = (x, y)
             i += 1
 
     return CtI, ItC
