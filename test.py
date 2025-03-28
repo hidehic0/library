@@ -1,10 +1,11 @@
 # competitive-verifier: UNITTEST PYTHON_UNITTEST_RESULT
 import unittest
+
+from libs.coordinate_compression import compress_1d
 from libs.grid import coordinate_check, grid_moves
-from libs.math_func import is_prime, simple_sigma, factorization_plural
-from libs.utils import lowerlist, upperlist, INF
+from libs.math_func import factorization_plural, is_prime, simple_sigma
 from libs.modint import mod_add, mod_sub
-from libs.coordinate_compression import coordinate_compression
+from libs.utils import INF, lowerlist, upperlist
 
 
 class GridTests(unittest.TestCase):
@@ -97,7 +98,7 @@ class TestCoordinateCompression(unittest.TestCase):
 
         for lis, ans in test_cases:
             with self.subTest(lis=lis):
-                self.assertEqual(coordinate_compression(lis), ans)
+                self.assertEqual(compress_1d(lis), ans)
 
 
 if __name__ == "__main__":

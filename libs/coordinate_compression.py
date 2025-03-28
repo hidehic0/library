@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
 
-def compression_1d(lis: List[int] | Tuple[int]) -> List[int]:
+def compress_1d(points: List[int] | Tuple[int]) -> List[int]:
     """
     一次元座標圧縮します
     計算量は、O(N log N)です
@@ -9,9 +9,9 @@ def compression_1d(lis: List[int] | Tuple[int]) -> List[int]:
     lとrは、まとめて入れる事で、座圧できます
     """
     res = []
-    d = {num: ind for ind, num in enumerate(sorted(set(lis)))}
+    d = {num: ind for ind, num in enumerate(sorted(set(points)))}
 
-    for a in lis:
+    for a in points:
         res.append(d[a])
 
     return res
