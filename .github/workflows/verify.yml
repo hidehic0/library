@@ -1,7 +1,11 @@
 name: verify
 on:
-  push:
   workflow_dispatch:
+  paths:
+    - "libs/**"
+    - "merge_file.bash"
+    - "tests/**"
+    - "test.py"
 permissions:
   contents: read
   pages: write
