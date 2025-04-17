@@ -7,7 +7,7 @@ def s() -> str:
     """
     一行に一つのstringをinput
     """
-    return sys.stdin.readline().rstrip()
+    return input()
 
 
 def sl() -> List[str]:
