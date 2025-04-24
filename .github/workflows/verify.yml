@@ -2,6 +2,7 @@ name: verify
 on:
   push:
     paths:
+      - ".github/workflows/verify.yml"
       - "libs/**"
       - "merge_file.bash"
       - "tests/**"
