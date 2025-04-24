@@ -5,7 +5,7 @@ on:
       - "libs/**"
       - "merge_file.bash"
       - "tests/**"
-      - "test.py"
+      - "test_libs.py"
 permissions:
   contents: read
   pages: write
