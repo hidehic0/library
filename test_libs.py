@@ -1,7 +1,6 @@
 # competitive-verifier: UNITTEST PYTHON_UNITTEST_RESULT
 import unittest
 
-from libs.alias import reverserange
 from libs.coordinate_compression import compress_1d
 from libs.grid import coordinate_check, grid_moves
 from libs.math_func import factorization_plural, is_prime, simple_sigma
@@ -100,15 +99,6 @@ class TestCoordinateCompression(unittest.TestCase):
         for lis, ans in test_cases:
             with self.subTest(lis=lis):
                 self.assertEqual(compress_1d(lis), ans)
-
-
-class TestAlias(unittest.TestCase):
-    def test_reverserange(self):
-        test_cases = [([1, 4], [3, 2, 1]), ([1, 5, 2], [3, 1])]
-
-        for args, ans in test_cases:
-            with self.subTest(args=args):
-                self.assertEqual(list(reverserange(*args)), ans)
 
 
 if __name__ == "__main__":

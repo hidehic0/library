@@ -35,7 +35,7 @@ jobs:
           include: |
             libs/
             tests/
-            test.py
+            test_libs.py
           exclude: |
             .github/
             code/
