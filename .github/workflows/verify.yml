@@ -4,7 +4,6 @@ on:
     paths:
       - ".github/workflows/verify.yml"
       - "libs/**"
-      - "merge_file.bash"
       - "tests/**"
       - "test_libs.py"
 permissions:
