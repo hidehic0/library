@@ -223,7 +223,7 @@ def comb(n: int, r: int, mod: int | None = None) -> int:
 
 
 # 多次元配列作成
-from typing import Any, List
+from typing import List, Any
 
 
 def create_array1(n: int, default: Any = 0) -> List[Any]:
@@ -717,8 +717,8 @@ eは初期化する値
 
 vは配列の長さまたは、初期化する内容
 """
-import math
 from collections import defaultdict
+import math
 
 
 class WeightedTreeLCA:
