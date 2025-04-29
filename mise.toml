@@ -1,6 +1,10 @@
 [tools]
 pre-commit = "4.2.0"
+uv = "0.6.17"
 python = "pypy3.10-7.3.17"
 
 [tasks]
-test = "python3 -m unittest test.py"
+install = "uv sync && mise generate git-pre-commit --write --task=pre_commmit_task"
+
+[tasks.pre-commit]
+run = "./pre_commit.bash"
