@@ -4,7 +4,7 @@ uv = "0.6.17"
 python = "pypy3.10-7.3.17"
 
 [tasks]
-install = "uv sync && mise generate git-pre-commit --write --task=pre_commmit_task"
+install = "uv sync && mise generate git-pre-commit --write --task=pre-commit"
 
 [tasks.pre-commit]
 run = "./pre_commit.bash"
