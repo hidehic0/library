@@ -1,6 +1,6 @@
 [tools]
 pre-commit = "4.2.0"
-uv = "0.6.17"
+uv = "0.7.0"
 python = "pypy3.10-7.3.17"
 
 [tasks]
