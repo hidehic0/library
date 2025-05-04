@@ -89,22 +89,6 @@ def li(n: int, func, *args) -> List[List[Any]]:
     return [func(*args) for _ in [0] * n]
 
 
-import sys
-
-
-def print(*args, **kwargs):
-    """
-    sys.stdoutでラップしました
-    基本的に普通のprintと一緒ですがflushだけは絶対に指定しましょう
-    """
-    sys.stdout.write(
-        kwargs.pop("sep", " ").join([str(x) for x in args]) + kwargs.pop("end", "\n")
-    )
-
-    if kwargs.pop("flush", False):
-        sys.stdout.flush()
-
-
 from typing import List
 
 
