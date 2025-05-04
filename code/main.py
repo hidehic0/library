@@ -1,3 +1,71 @@
+# インタラクティブ問題の時はIS_INTERACTIVEをTrueにしましょう
+
+# 標準入力関数
+import io
+import os
+import sys
+from typing import Any, List
+
+if sys.argv[0] == "Main.py":
+    try:
+        # ruff: noqa
+        if not IS_INTERACTIVE:
+            input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline
+    except:
+        pass
+
+
+def s() -> str:
+    """
+    一行に一つのstringをinput
+    """
+    return input()
+
+
+def sl() -> List[str]:
+    """
+    一行に複数のstringをinput
+    """
+    return s().split()
+
+
+def ii() -> int:
+    """
+    一つのint
+    """
+    return int(s())
+
+
+def il(add_num: int = 0) -> List[int]:
+    """
+    一行に複数のint
+    """
+    return list(map(lambda i: int(i) + add_num, sl()))
+
+
+def li(n: int, func, *args) -> List[List[Any]]:
+    """
+    複数行の入力をサポート
+    """
+    return [func(*args) for _ in [0] * n]
+
+
+import sys
+
+
+def print(*args, **kwargs):
+    """
+    sys.stdoutでラップしました
+    基本的に普通のprintと一緒ですがflushだけは絶対に指定しましょう
+    """
+    sys.stdout.write(
+        kwargs.pop("sep", " ").join([str(x) for x in args]) + kwargs.pop("end", "\n")
+    )
+
+    if kwargs.pop("flush", False):
+        sys.stdout.flush()
+
+
 r"""
  ______________________
 < it's hidehico's code >
@@ -370,51 +438,6 @@ class ModInt:
 
     def __ne__(self, rhs) -> bool:
         return self.rhs(rhs) != self.x
-
-
-# 標準入力関数
-import io
-import os
-import sys
-from typing import Any, List
-
-if sys.argv[0] == "Main.py":
-    input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline()
-
-
-def s() -> str:
-    """
-    一行に一つのstringをinput
-    """
-    return input()
-
-
-def sl() -> List[str]:
-    """
-    一行に複数のstringをinput
-    """
-    return s().split()
-
-
-def ii() -> int:
-    """
-    一つのint
-    """
-    return int(s())
-
-
-def il(add_num: int = 0) -> List[int]:
-    """
-    一行に複数のint
-    """
-    return list(map(lambda i: int(i) + add_num, sl()))
-
-
-def li(n: int, func, *args) -> List[List[Any]]:
-    """
-    複数行の入力をサポート
-    """
-    return [func(*args) for _ in [0] * n]
 
 
 # YesNo関数
