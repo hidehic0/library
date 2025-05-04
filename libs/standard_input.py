@@ -1,6 +1,11 @@
 # 標準入力関数
+import io
+import os
 import sys
 from typing import Any, List
+
+if sys.argv[0] == "Main.py":
+    input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline().decode().strip
 
 
 def s() -> str:
