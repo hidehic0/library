@@ -379,7 +379,7 @@ import sys
 from typing import Any, List
 
 if sys.argv[0] == "Main.py":
-    input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline().decode().strip
+    input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline()
 
 
 def s() -> str:
