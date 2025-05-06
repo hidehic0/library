@@ -37,21 +37,18 @@ from typing import Any, List, Tuple
 # pypyjit.set_param("max_unroll_recursion=-1")
 
 sys.setrecursionlimit(5 * 10**5)
-# インタラクティブ問題の時はIS_INTERACTIVEをTrueにしましょう
-
-# 標準入力関数
 import io
 import os
 import sys
 from typing import Any, List
 
+# インタラクティブ問題の時はIS_INTERACTIVEをTrueにしましょう
+IS_INTERACTIVE = False
+
+# 標準入力関数
 if sys.argv[0] == "Main.py":
-    try:
-        # ruff: noqa
-        if not IS_INTERACTIVE:
-            input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline
-    except:
-        pass
+    if not IS_INTERACTIVE:
+        input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline
 
 
 def s() -> str:

@@ -4,9 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = [
-    "debugpy>=1.8.14",
-]
+dependencies = ["debugpy>=1.8.14"]
 
 [tool.ruff]
 line-length = 88
@@ -16,11 +14,11 @@ select = ["C9", "E", "F", "W", "I"]
 ignore = [
   "F401",
   "E402",
-  "F811",
   "E741",
   "F405",
   "F403",
   "I001",
   "E722",
   "E501",
+  "F811",
 ]
