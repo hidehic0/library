@@ -4,12 +4,12 @@ import sys
 from typing import Any, List
 
 # インタラクティブ問題の時はIS_INTERACTIVEをTrueにしましょう
-IS_INTERACTIVE = False
+# IS_INTERACTIVE = False
 
 # 標準入力関数
-if sys.argv[0] == "Main.py":
-    if not IS_INTERACTIVE:
-        input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline
+# if sys.argv[0] == "Main.py":
+#     if not IS_INTERACTIVE:
+#         input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline().decode().rstrip
 
 
 def s() -> str:
