@@ -10,7 +10,7 @@ dependencies = ["debugpy>=1.8.14"]
 line-length = 88
 
 [tool.ruff.lint]
-select = ["C9", "E", "F", "W", "I"]
+select = ["C9", "E", "F", "W", "I", "ANN"]
 ignore = [
   "F401",
   "E402",
