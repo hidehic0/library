@@ -3,6 +3,7 @@ import unittest
 
 from libs.coordinate_compression import compress_1d
 from libs.grid import coordinate_check, grid_moves
+from libs.heap import _keys_for_heapq, HeapMin
 from libs.math_func import factorization_plural, is_prime, simple_sigma
 from libs.modint import mod_add, mod_sub
 from libs.utils import INF, lowerlist, upperlist
@@ -99,6 +100,43 @@ class TestCoordinateCompression(unittest.TestCase):
         for lis, ans in test_cases:
             with self.subTest(lis=lis):
                 self.assertEqual(compress_1d(lis), ans)
+
+
+class TestHeap(unittest.TestCase):
+    def test_heap_key(self):
+        test_cases = [((1, 2), 1), (1, 1), (((1, 3), (2, 2)), 1)]
+
+        for lis, ans in test_cases:
+            with self.subTest(lis=lis):
+                self.assertEqual(_keys_for_heapq(lis), ans)
+
+    def test_minheap(self):
+        test_cases = [4, 3, 5, 1]
+        L = HeapMin()
+
+        for i in test_cases:
+            L.push(i)
+
+        self.assertTrue(len(L) == 4)
+        self.assertEqual(L[0], 1)
+
+        self.assertListEqual(
+            sorted(test_cases), [L.pop() for _ in range(len(test_cases))]
+        )
+
+        test_cases = [(4, 1), (3, 2), (5, 3), (1, 4)]
+        L = HeapMin()
+
+        for i in test_cases:
+            L.push(i)
+
+        self.assertTrue(len(L) == 4)
+        self.assertEqual(L[0], (1, 4))
+
+        self.assertListEqual(
+            sorted(test_cases, key=lambda x: x[0]),
+            [L.pop() for _ in range(len(test_cases))],
+        )
 
 
 if __name__ == "__main__":
