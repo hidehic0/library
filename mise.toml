@@ -1,5 +1,5 @@
 [tools]
-uv = "0.7.7"
+uv = "0.7.8"
 python = "pypy3.10-7.3.17"
 
 [tasks]
