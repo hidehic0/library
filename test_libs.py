@@ -10,7 +10,7 @@ from libs.utils import INF, lowerlist, upperlist
 
 
 class GridTests(unittest.TestCase):
-    def test_coordinate_check(self):
+    def test_coordinate_check(self) -> None:
         test_cases = [
             (0, 0, 1, 1, True),
             (1, 3, 1, 1, False),
@@ -24,7 +24,7 @@ class GridTests(unittest.TestCase):
 
 
 class TestMathFunctions(unittest.TestCase):
-    def test_is_prime(self):
+    def test_is_prime(self) -> None:
         test_cases = [
             (1, False),
             (2, True),
@@ -43,7 +43,7 @@ class TestMathFunctions(unittest.TestCase):
             with self.subTest(i=i):
                 self.assertEqual(is_prime(i), ans)
 
-    def test_simple_sigma(self):
+    def test_simple_sigma(self) -> None:
         test_cases = [
             (3, 6),
             (5000000000, 12500000002500000000),
@@ -55,7 +55,7 @@ class TestMathFunctions(unittest.TestCase):
             with self.subTest(i=i):
                 self.assertEqual(simple_sigma(i), ans)
 
-    def test_factorization_plural(self):
+    def test_factorization_plural(self) -> None:
         test_cases = [([5, 10], [[[5, 1]], [[2, 1], [5, 1]]])]
 
         for l, ans in test_cases:
@@ -64,25 +64,25 @@ class TestMathFunctions(unittest.TestCase):
 
 
 class TestUtilsVariable(unittest.TestCase):
-    def test_lowerlist(self):
+    def test_lowerlist(self) -> None:
         self.assertEqual([chr(i) for i in range(97, 123)], lowerlist)
 
-    def test_upperlist(self):
+    def test_upperlist(self) -> None:
         self.assertEqual([chr(i) for i in range(65, 91)], upperlist)
 
-    def test_inf_value(self):
+    def test_inf_value(self) -> None:
         self.assertEqual(1 << 63, INF)
 
 
 class TestModFunctions(unittest.TestCase):
-    def test_modadd(self):
+    def test_modadd(self) -> None:
         test_cases = [(1, 1, 4, 2), (5, 5, 7, 3), (10, -5, 3, 2)]
 
         for a, b, mod, ans in test_cases:
             with self.subTest(a=a, b=b, mod=mod):
                 self.assertEqual(mod_add(a, b, mod), ans)
 
-    def test_modsub(self):
+    def test_modsub(self) -> None:
         test_cases = [(3, 1, 4, 2), (1, 5, 3, 2), (15, 3, 2, 0)]
 
         for a, b, mod, ans in test_cases:
@@ -91,7 +91,7 @@ class TestModFunctions(unittest.TestCase):
 
 
 class TestCoordinateCompression(unittest.TestCase):
-    def test_coordinate_compression(self):
+    def test_coordinate_compression(self) -> None:
         test_cases = [
             ((8, 100, 33, 12, 6, 1211), [1, 4, 3, 2, 0, 5]),
             ((5, 5, 5, 5, 5, 5), [0, 0, 0, 0, 0, 0]),
@@ -103,14 +103,14 @@ class TestCoordinateCompression(unittest.TestCase):
 
 
 class TestHeap(unittest.TestCase):
-    def test_heap_key(self):
+    def test_heap_key(self) -> None:
         test_cases = [((1, 2), 1), (1, 1), (((1, 3), (2, 2)), 1)]
 
         for lis, ans in test_cases:
             with self.subTest(lis=lis):
                 self.assertEqual(_keys_for_heapq(lis), ans)
 
-    def test_minheap(self):
+    def test_minheap(self) -> None:
         test_cases = [4, 3, 5, 1]
         L = HeapMin()
 
