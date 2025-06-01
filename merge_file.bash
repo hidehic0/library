@@ -7,7 +7,7 @@ echo "新しいmain.py作成完了"
 # テンプレ
 # /bin/cat python/<filename>.py >> code/main.py
 
-for file_name in "import.py" "standard_input.py" "math_func.py" "array_create.py" "binary_search.py" "modint.py" "yn_func.py" "grid.py" "coordinates_to_id.py" "dijkstra.py" "get_path.py" "dp.py" "coordinate_compression.py" "memo.py" "lca_weight.py" "graph.py" "unionfind.py" "potential_unionfind.py" "heap.py" "trie.py" "bit.py" "dis_lib.py" "alias.py" "utils.py"; do
+for file_name in "import.py" "standard_input.py" "math_func.py" "array_create.py" "binary_search.py" "modint.py" "yn_func.py" "grid.py" "coordinates_to_id.py" "dijkstra.py" "get_path.py" "dp.py" "coordinate_compression.py" "memo.py" "lca_weight.py" "rollinghash.py" "graph.py" "unionfind.py" "potential_unionfind.py" "heap.py" "trie.py" "bit.py" "dis_lib.py" "alias.py" "utils.py"; do
 
   cat libs/${file_name} >>code/main.py
 done
