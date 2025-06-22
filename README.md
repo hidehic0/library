@@ -2,6 +2,7 @@
 
 [![run unittest](https://github.com/hidehic0/library/actions/workflows/unittest.yml/badge.svg?branch=main)](https://github.com/hidehic0/library/actions/workflows/unittest.yml)
 [![CodeQL Advanced](https://github.com/hidehic0/library/actions/workflows/codeql.yml/badge.svg)](https://github.com/hidehic0/library/actions/workflows/codeql.yml)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/hidehic0/library)
 </br>
 
 [![total lines](https://tokei.rs/b1/github/hidehic0/library)](https://github.com/XAMPPRocky/tokei)
