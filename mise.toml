@@ -1,6 +1,6 @@
 [tools]
 uv = "0.7.14"
-python = "pypy3.10-7.3.17"
+python = "3.13.5"
 
 [tasks]
 install = "uv sync && mise generate git-pre-commit --write --task=pre-commit"
