@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "debugpy>=1.8.14",
+  "debugpy>=1.8.14",
 ]
 
 [tool.ruff]
@@ -13,3 +13,5 @@ line-length = 88
 
 [tool.ruff.lint]
 select = ["C9", "E", "F", "W", "I", "ANN"]
+ignore = ["E741", "ANN001"]
+
