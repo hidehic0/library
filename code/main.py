@@ -1494,6 +1494,7 @@ class DualSegmentTree:
         """
         区間[l,r)にxを適用
         """
+        assert 0 <= l <= r <= self.n
         l += self.n
         r += self.n
 
@@ -1512,6 +1513,7 @@ class DualSegmentTree:
         """
         pの値を取得する
         """
+        assert 0 <= p < self.n
 
         res = self._e
         p += self.n
