@@ -65,3 +65,22 @@ class SquareDivision:
     def get(self, i: int) -> Any:
         assert 0 <= i < self.n
         return self.lis[i]
+
+
+class SquareDivisionSpeedy(SquareDivision):
+    def __init__(
+        self,
+        lis: List[Any],
+        op: Callable[[Any, Any], Any],
+        delete: Callable[[Any, Any], Any],
+    ) -> None:
+        self.delete = delete
+        super().__init__(lis, op)
+
+    def update(self, i: int, x: Any) -> None:
+        assert 0 <= i < self.n
+
+        block_ind = self.get_block_index_left(i)
+        self.blocks[block_ind] = self.delete(self.blocks[block_ind], self.lis[i])
+        self.lis[i] = x
+        self.blocks[block_ind] = self.op(self.blocks[block_ind], self.lis[i])
