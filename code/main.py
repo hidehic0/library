@@ -823,8 +823,7 @@ class RollingHash:
 
     def get(self, l: int, r: int) -> int:
         """
-        lからrまでのハッシュ値を取得する
-        0-indexed
+        区間[l,r)のハッシュ値を取得する
         """
         return (self.hash[r] - self.hash[l] * self.pow[r - l]) % self.mod
 
