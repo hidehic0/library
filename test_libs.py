@@ -2,10 +2,11 @@
 import unittest
 
 from libs.coordinate_compression import compress_1d
-from libs.grid import coordinate_check, grid_moves
-from libs.heap import _keys_for_heapq, HeapMin
+from libs.grid import coordinate_check
+from libs.heap import HeapMin, _keys_for_heapq
 from libs.math_func import factorization_plural, is_prime, simple_sigma
 from libs.modint import mod_add, mod_sub
+from libs.rerooting import rerooting
 from libs.utils import INF, lowerlist, upperlist
 
 
@@ -137,6 +138,20 @@ class TestHeap(unittest.TestCase):
             sorted(test_cases, key=lambda x: x[0]),
             [L.pop() for _ in range(len(test_cases))],
         )
+
+
+class TestReRooting(unittest.TestCase):
+    def test_rerooting(self) -> None:
+        G = [[] for _ in [0] * 6]
+
+        for a, b in [[1, 2], [1, 3], [3, 4], [3, 5], [5, 6]]:
+            a -= 1
+            b -= 1
+            G[a].append(b)
+            G[b].append(a)
+
+        res = rerooting(G, max, lambda x: x + 1, -1)
+        self.assertEqual(res, [3, 4, 2, 3, 3, 4])
 
 
 if __name__ == "__main__":
