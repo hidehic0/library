@@ -22,20 +22,20 @@ class UnionFind:
         if self.data[vtx] < 0:
             return vtx
 
-        return self.root(self.data[vtx])
+        return self.leader(self.data[vtx])
 
     def same(self, a: int, b: int):
         """
         aとbが連結しているかどうか判定します
         """
-        return self.root(a) == self.root(b)
+        return self.leader(a) == self.leader(b)
 
     def merge(self, a: int, b: int) -> bool:
         """
         aとbを結合します
-        rootが同じでも、履歴には追加します
+        leaderが同じでも、履歴には追加します
         """
-        ra, rb = self.root(a), self.root(b)
+        ra, rb = self.leader(a), self.leader(b)
 
         # 履歴を作成する
         new_hist = [ra, rb, self.data[ra], self.data[rb]]
@@ -69,7 +69,7 @@ class UnionFind:
         D = defaultdict(list)
 
         for i in range(self.size):
-            D[self.root(i)].append(i)
+            D[self.leader(i)].append(i)
 
         res = []
 
