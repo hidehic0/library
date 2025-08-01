@@ -2,12 +2,11 @@
 from libs.manacher import manacher_algorithm
 
 S = input()
-T = "$"
-
+T = ["$"]
 for s in S:
-    T += s + "$"
-
-T = T
+    T.append(s)
+    T.append("$")
+T = "".join(T)
 
 L = manacher_algorithm(T)
 
