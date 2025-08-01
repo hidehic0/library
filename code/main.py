@@ -1065,7 +1065,7 @@ class UnionFind:
         self.data = [-1] * n
         self.hist = []
 
-    def root(self, vtx: int) -> int:
+    def leader(self, vtx: int) -> int:
         """
         頂点vtxの親を出力します
         """
@@ -1080,7 +1080,7 @@ class UnionFind:
         """
         return self.root(a) == self.root(b)
 
-    def unite(self, a: int, b: int) -> bool:
+    def merge(self, a: int, b: int) -> bool:
         """
         aとbを結合します
         rootが同じでも、履歴には追加します
