@@ -1,11 +1,10 @@
 from typing import Any, Callable, List
-from collections import defaultdict
 
 
 def rerooting(
     G: List[List[int]],
     merge: Callable[[Any, Any], Any],
-    add_root: Callable[Any, Any],
+    add_root: Callable[[int, Any], Any],
     e,
 ) -> List[Any]:
     _n = len(G)
@@ -25,7 +24,7 @@ def rerooting(
             dp[u][i] = _dfs(v, u)
             res = merge(res, dp[u][i])
 
-        return add_root(res)
+        return add_root(u, res)
 
     def _bfs(u: int, cur: Any, p: int = -1):
         nonlocal dp, merge, add_root, e, ans
@@ -43,11 +42,11 @@ def rerooting(
         for i in reversed(range(deg)):
             dp_r[i] = merge(dp_r[i + 1], dp[u][i])
 
-        ans[u] = add_root(dp_l[deg])
+        ans[u] = add_root(u, dp_l[deg])
 
         for i in range(deg):
             if G[u][i] != p:
-                _bfs(G[u][i], add_root(merge(dp_l[i], dp_r[i + 1])), u)
+                _bfs(G[u][i], add_root(u, merge(dp_l[i], dp_r[i + 1])), u)
 
     _dfs(0)
     _bfs(0, e)
