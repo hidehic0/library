@@ -3,6 +3,15 @@ revision = 3
 requires-python = ">=3.10"
 
 [[package]]
+name = "ac-library-python"
+version = "0.1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/93/b7/995992a9e8b843b7a17ec1e2537efd46c9a24d56b5cb8041a04c53816b0a/ac_library_python-0.1.0.tar.gz", hash = "sha256:1319283074a7df95d13431b4fbc80bd98c69ae20442e3266cc4bb5e39dea766a", size = 23580, upload-time = "2024-11-19T00:48:45.185Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/04/a5/2327a9e3e9c311d6caa56e05d0ed656a986160eb961f99cc09962045c0e4/ac_library_python-0.1.0-py3-none-any.whl", hash = "sha256:569cdaf4837e9b820c867b1c7546483542e0e08c8a2732b5fefa11aa917d1d9d", size = 34248, upload-time = "2024-11-19T00:48:42.966Z" },
+]
+
+[[package]]
 name = "debugpy"
 version = "1.8.16"
 source = { registry = "https://pypi.org/simple" }
@@ -32,8 +41,12 @@ name = "library"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "ac-library-python" },
     { name = "debugpy" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "debugpy", specifier = ">=1.8.14" }]
+requires-dist = [
+    { name = "ac-library-python" },
+    { name = "debugpy", specifier = ">=1.8.14" },
+]

@@ -34,6 +34,7 @@ from typing import Any, List, Tuple
 
 # from atcoder.segtree import SegTree
 # from atcoder.lazysegtree import LazySegTree
+# from atcoder.fenwicktree import FenwickTree
 # from atcoder.dsu import DSU
 
 # cortedcontainersは使うときだけ wandbox非対応なので

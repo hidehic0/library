@@ -34,6 +34,7 @@ from typing import Any, List, Tuple
 
 # from atcoder.segtree import SegTree
 # from atcoder.lazysegtree import LazySegTree
+# from atcoder.fenwicktree import FenwickTree
 # from atcoder.dsu import DSU
 
 # cortedcontainersは使うときだけ wandbox非対応なので
@@ -788,70 +789,6 @@ def rerooting(
     return ans
 
 
-from collections import defaultdict
-import math
-
-
-class WeightedTreeLCA:
-    def __init__(self, n):
-        """初期化: ノード数nの木を構築（0-indexed）"""
-        self.n = n
-        self.log = math.ceil(math.log2(n)) + 1
-        self.adj = defaultdict(list)  # 隣接リスト: {ノード: [(隣接ノード, 重み), ...]}
-        self.depth = [0] * n  # 各ノードの深さ
-        self.dist = [0] * n  # 根からの重み合計
-        self.ancestor = [[-1] * self.log for _ in range(n)]  # ダブリングテーブル
-
-    def add_edge(self, u, v, w):
-        """辺を追加: uとvを重みwで接続"""
-        self.adj[u].append((v, w))
-        self.adj[v].append((u, w))
-
-    def dfs(self, u, parent, d, w):
-        """DFSで深さ、距離、親を計算"""
-        self.depth[u] = d
-        self.dist[u] = w
-        for v, weight in self.adj[u]:
-            if v != parent:
-                self.ancestor[v][0] = u
-                self.dfs(v, u, d + 1, w + weight)
-
-    def build(self, root=0):
-        """ダブリングテーブルの構築"""
-        # DFSで初期情報収集
-        self.dfs(root, -1, 0, 0)
-        # ダブリングテーブルを埋める
-        for k in range(1, self.log):
-            for u in range(self.n):
-                if self.ancestor[u][k - 1] != -1:
-                    self.ancestor[u][k] = self.ancestor[self.ancestor[u][k - 1]][k - 1]
-
-    def lca(self, u, v):
-        """ノードuとvのLCAを求める"""
-        # 深さを揃える
-        if self.depth[u] < self.depth[v]:
-            u, v = v, u
-        for k in range(self.log - 1, -1, -1):
-            if (
-                self.ancestor[u][k] != -1
-                and self.depth[self.ancestor[u][k]] >= self.depth[v]
-            ):
-                u = self.ancestor[u][k]
-        if u == v:
-            return u
-        # 同時にジャンプ
-        for k in range(self.log - 1, -1, -1):
-            if self.ancestor[u][k] != self.ancestor[v][k]:
-                u = self.ancestor[u][k]
-                v = self.ancestor[v][k]
-        return self.ancestor[u][0]
-
-    def get_distance(self, u, v):
-        """ノードuとvの間の距離（重みの合計）を求める"""
-        lca_node = self.lca(u, v)
-        return self.dist[u] + self.dist[v] - 2 * self.dist[lca_node]
-
-
 from typing import List
 
 
@@ -1531,55 +1468,6 @@ class SquareDivisionSpeedy(SquareDivision):
         self.blocks[block_ind] = self.delete(self.blocks[block_ind], self.lis[i])
         self.lis[i] = x
         self.blocks[block_ind] = self.op(self.blocks[block_ind], self.lis[i])
-
-
-from typing import List
-
-
-class BIT:
-    """
-    BITです
-    要素更新と、区間和を求める事ができます
-    1-indexedです
-
-    計算量は、一回の動作につきすべてO(log n)です
-    """
-
-    def __init__(self, n: int) -> None:
-        self.n: int = n
-        self.bit: List[int] = [0] * (n + 1)
-
-    def sum(self, i: int) -> int:
-        """
-        i番目までの和を求めます
-        計算量は、O(log n)です
-        """
-        res = 0
-
-        while i:
-            res += self.bit[i]
-            i -= -i & i
-
-        return res
-
-    def interval_sum(self, l: int, r: int) -> int:
-        """
-        lからrまでの総和を求められます
-        lは0-indexedで、rは1-indexedにしてください
-        """
-        return self.sum(r) - self.sum(l)
-
-    def add(self, i: int, x: int):
-        """
-        i番目の要素にxを足します
-        計算量は、O(log n)です
-        """
-        if i == 0:
-            raise IndexError("このデータ構造は、1-indexedです")
-
-        while i <= self.n:
-            self.bit[i] += x
-            i += -i & i
 
 
 from typing import Any, Callable
