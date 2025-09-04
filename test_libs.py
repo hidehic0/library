@@ -2,6 +2,7 @@
 import unittest
 
 from libs.coordinate_compression import compress_1d
+from libs.euler_tour import EulerTour
 from libs.grid import coordinate_check
 from libs.heap import HeapMin, _keys_for_heapq
 from libs.math_func import factorization_plural, is_prime, simple_sigma
@@ -10,7 +11,7 @@ from libs.rerooting import rerooting
 from libs.utils import INF, lowerlist, upperlist
 
 
-class GridTests(unittest.TestCase):
+class TestGrid(unittest.TestCase):
     def test_coordinate_check(self) -> None:
         test_cases = [
             (0, 0, 1, 1, True),
@@ -150,8 +151,27 @@ class TestReRooting(unittest.TestCase):
             G[a].append(b)
             G[b].append(a)
 
-        res = rerooting(G, max, lambda x: x + 1, -1)
+        res = rerooting(G, max, lambda _, x: x + 1, -1)
         self.assertEqual(res, [3, 4, 2, 3, 3, 4])
+
+
+class TestEulerTour(unittest.TestCase):
+    def test_eulertour(self) -> None:
+        # https://atcoder.jp/contests/abc294/tasks/abc294_gの内容
+        E = [(0, 1, 3), (0, 2, 6), (0, 3, 9), (3, 4, 10)]
+        ET = EulerTour(E)
+
+        for l, ans in [
+            [(1, 1, 2), 9],
+            [(1, 0, 4), 19],
+            [(0, 2, 1), -1],
+            [(1, 0, 4), 11],
+        ]:
+            if l[0] == 1:
+                with self.subTest(l=l, ans=ans):
+                    self.assertEqual(ET.path_query(l[1], l[2]), ans)
+            else:
+                ET.change_edge_cost(l[1], l[2])
 
 
 if __name__ == "__main__":

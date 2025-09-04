@@ -27,6 +27,7 @@ jobs:
         id: python-unittest
         continue-on-error: true
         run: |
+          python -m git+https://github.com/not522/ac-library-python
           python test_libs.py
       - name: oj-resolve
         uses: competitive-verifier/actions/oj-resolve@v2
