@@ -1,3 +1,4 @@
+# competitive-verifier: PROBLEM https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0560
 from libs.prefix_sum_2d import PrefixSum2D
 
 H, W = map(int, input().split())
