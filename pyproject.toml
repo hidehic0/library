@@ -13,6 +13,6 @@ dependencies = [
 line-length = 88
 
 [tool.ruff.lint]
-select = ["C9", "E", "F", "W", "I", "ANN"]
-ignore = ["E741", "ANN001"]
+select = ["ALL"]
+ignore = ["E741", "ANN001", "S101", "D102", "D101", "D100", "PT018"]
 
