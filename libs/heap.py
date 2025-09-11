@@ -19,7 +19,7 @@ class HeapBase:
     def __init__(
         self,
         arr: list[Any] = [],
-        key: Callable[Any, Any] = _keys_for_heapq,
+        key: Callable[[Any], Any] = _keys_for_heapq,
     ) -> None:
         """arrはソート済みが前提です"""
         self.key: Callable[Any, Any] = key

@@ -12,7 +12,7 @@ def is_prime(n: int) -> int:
     def f(a, t, n):
         x = pow(a, t, n)
         nt = n - 1
-        while t != nt and x not in (x, nt):
+        while t != nt and x not in (1, nt):
             x = pow(x, 2, n)
             t <<= 1
 

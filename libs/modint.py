@@ -1,4 +1,4 @@
-from typing_extensions import Self
+from typing import Self
 
 
 def mod_add(a: int, b: int, mod: int) -> int:

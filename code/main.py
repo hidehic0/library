@@ -89,7 +89,7 @@ def is_prime(n: int) -> int:
     def f(a, t, n):
         x = pow(a, t, n)
         nt = n - 1
-        while t != nt and x not in (x, nt):
+        while t != nt and x not in (1, nt):
             x = pow(x, 2, n)
             t <<= 1
 
@@ -309,7 +309,7 @@ def binary_search(
     return left if return_left else right
 
 
-from typing_extensions import Self
+from typing import Self
 
 
 def mod_add(a: int, b: int, mod: int) -> int:
@@ -1221,7 +1221,7 @@ class HeapBase:
     def __init__(
         self,
         arr: list[Any] = [],
-        key: Callable[Any, Any] = _keys_for_heapq,
+        key: Callable[[Any], Any] = _keys_for_heapq,
     ) -> None:
         """arrはソート済みが前提です"""
         self.key: Callable[Any, Any] = key
