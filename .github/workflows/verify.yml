@@ -17,10 +17,10 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - run: echo "export PYTHONPATH=$(pwd)" >> $GITHUB_ENV # 追加
       - name: Set up competitive-verifier
-        uses: competitive-verifier/actions/setup@v2
+        uses: competitive-verifier/actions/setup@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
         with:
           cache-pip: true
       - name: python unittest
@@ -30,7 +30,7 @@ jobs:
           python -m pip install git+https://github.com/not522/ac-library-python
           python test_libs.py
       - name: oj-resolve
-        uses: competitive-verifier/actions/oj-resolve@v2
+        uses: competitive-verifier/actions/oj-resolve@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
         with:
           output-path: verify_files.json
           include: |
@@ -43,7 +43,7 @@ jobs:
         env:
           PYTHON_UNITTEST_RESULT: ${{ steps.python-unittest.outcome == 'success' }}
       - name: Upload verify_files.json
-        uses: competitive-verifier/actions/upload-verify-artifact@v2
+        uses: competitive-verifier/actions/upload-verify-artifact@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
         with:
           file: verify_files.json
       - name: Check bundled
@@ -51,7 +51,7 @@ jobs:
         run: |
           echo "count=$(find .competitive-verifier/bundled/ -type f | wc -l)" >> $GITHUB_OUTPUT
       - name: Upload bundled
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: steps.test-bundled.outputs.count > 0
         with:
           name: Bundled-${{ runner.os }}
@@ -66,16 +66,16 @@ jobs:
       matrix:
         index: ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - run: echo "export PYTHONPATH=$(pwd)" >> $GITHUB_ENV # 追加
       - name: Download verify_files.json
-        uses: competitive-verifier/actions/download-verify-artifact@v2
+        uses: competitive-verifier/actions/download-verify-artifact@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
       - name: Set up competitive-verifier
-        uses: competitive-verifier/actions/setup@v2
+        uses: competitive-verifier/actions/setup@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
         with:
           cache-pip: true
       - name: Verify
-        uses: competitive-verifier/actions/verify@v2
+        uses: competitive-verifier/actions/verify@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
         with:
           destination: ${{runner.temp}}/result.json
           split-size: ${{ env.SPLIT_SIZE }}
@@ -84,7 +84,7 @@ jobs:
         env:
           YUKICODER_TOKEN: ${{secrets.YUKICODER_TOKEN}}
       - name: Upload result artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: Result-${{ runner.os }}-${{ matrix.index }}
           path: ${{runner.temp}}/result.json
@@ -95,13 +95,13 @@ jobs:
     outputs:
       upload-pages: ${{steps.upload-pages.outcome == 'success'}}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           fetch-depth: 2147483647
       - run: echo "export PYTHONPATH=$(pwd)" >> $GITHUB_ENV # 追加
       - name: Download verify_files.json and all artifacts
         id: all-artifacts
-        uses: competitive-verifier/actions/download-verify-artifact@v2
+        uses: competitive-verifier/actions/download-verify-artifact@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
         with:
           download-all: true
           artifact-root: .artifacts/
@@ -118,29 +118,29 @@ jobs:
         env:
           SRCDIR: .artifacts/Bundled-${{ runner.os }}
       - name: Set up competitive-verifier
-        uses: competitive-verifier/actions/setup@v2
+        uses: competitive-verifier/actions/setup@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
         with:
           cache-pip: true
       - name: Docs
-        uses: competitive-verifier/actions/docs@v2
+        uses: competitive-verifier/actions/docs@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
         with:
           verify-result: ${{ steps.all-artifacts.outputs.artifacts-root }}/Result-*/result.json
           destination: _jekyll
           write-summary: true
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
       - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1.0.13
         with:
           source: _jekyll
           destination: _site
       - name: Upload artifact
         id: upload-pages
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
           path: _site
       - name: Check
-        uses: competitive-verifier/actions/check@v2
+        uses: competitive-verifier/actions/check@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
         with:
           verify-result: ${{ steps.all-artifacts.outputs.artifacts-root }}/Result-*/result.json
   deploy:
@@ -153,4 +153,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
