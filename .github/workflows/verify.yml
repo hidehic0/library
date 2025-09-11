@@ -6,6 +6,7 @@ on:
       - "libs/**"
       - "tests/**"
       - "test_libs.py"
+  workflow_dispatch:
 permissions:
   contents: read
   pages: write
