@@ -1,15 +1,17 @@
-from typing import Any, Callable, List
+from collections.abc import Callable
+from typing import Any
 
 
 def rerooting(
-    G: List[List[int]],
+    G: list[list[int]],
     merge: Callable[[Any, Any], Any],
     add_root: Callable[[int, Any], Any],
     e,
-) -> List[Any]:
+) -> list[Any]:
+    """全方位木dp"""
     _n = len(G)
-    dp: List[List[Any]] = [[]] * _n
-    ans: List[Any] = [e] * _n
+    dp: list[list[Any]] = [[]] * _n
+    ans: list[Any] = [e] * _n
 
     def _dfs(u: int, p: int = -1):
         nonlocal dp, merge, add_root, e

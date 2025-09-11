@@ -1,42 +1,49 @@
-def mod_add(a: int, b: int, mod: int):
-    """
-    足し算してmodを取った値を出力
+from typing_extensions import Self
+
+
+def mod_add(a: int, b: int, mod: int) -> int:
+    """足し算してmodを取った値を出力
+
     O(1)
     """
     return (a + b) % mod
 
 
-def mod_sub(a: int, b: int, mod: int):
-    """
-    引き算してmodを取った値を出力
+def mod_sub(a: int, b: int, mod: int) -> int:
+    """引き算してmodを取った値を出力
+
     O(1)
     """
     return (a - b) % mod
 
 
-def mod_mul(a: int, b: int, mod: int):
-    """
-    掛け算してmodを取った値を出力
+def mod_mul(a: int, b: int, mod: int) -> int:
+    """掛け算してmodを取った値を出力
+
     O(1)
     """
     return (a * b) % mod
 
 
-def mod_div(a: int, b: int, mod: int):
-    """
-    割り算してmodを取った値を出力
+def mod_div(a: int, b: int, mod: int) -> int:
+    """割り算してmodを取った値を出力
+
     フェルマーの小定理を使って計算します
     O(log mod)
     """
-    return (a * pow(b, mod - 2, mod)) % mod
+    return (a * pow(b, -1, mod)) % mod
 
 
 class ModInt:
     def __init__(self, x: int, mod: int = 998244353) -> None:
+        """ModInt
+
+        リストで使うと参照渡しになるので注意
+        """
         self.x = x % mod
         self.mod = mod
 
-    def val(self):
+    def val(self) -> int:
         return self.x
 
     def rhs(self, rhs) -> int:
@@ -45,7 +52,7 @@ class ModInt:
     def __add__(self, rhs) -> int:
         return mod_add(self.x, self.rhs(rhs), self.mod)
 
-    def __iadd__(self, rhs) -> "ModInt":
+    def __iadd__(self, rhs) -> Self:
         self.x = self.__add__(rhs)
 
         return self
@@ -53,7 +60,7 @@ class ModInt:
     def __sub__(self, rhs) -> int:
         return mod_sub(self.x, self.rhs(rhs), self.mod)
 
-    def __isub__(self, rhs) -> "ModInt":
+    def __isub__(self, rhs) -> Self:
         self.x = self.__sub__(rhs)
 
         return self
@@ -90,3 +97,6 @@ class ModInt:
 
     def __ne__(self, rhs) -> bool:
         return self.rhs(rhs) != self.x
+
+    def __hash__(self) -> int:
+        return hash(self.x)

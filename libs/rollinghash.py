@@ -1,6 +1,3 @@
-from typing import List
-
-
 class RollingHash:
     string: str
     mod: int
@@ -8,8 +5,8 @@ class RollingHash:
     n: int
 
     def __init__(self, string: str, mod: int = (1 << 61) - 1) -> None:
-        """
-        RollingHash構造体
+        """RollingHash構造体
+
         衝突する可能性があるのでmodが違う二つで比較するのが有効
 
         string: 文字列
@@ -30,17 +27,14 @@ class RollingHash:
             self.pow[i + 1] = self.pow[i] * self.base % mod
 
     def get(self, l: int, r: int) -> int:
-        """
-        区間[l,r)のハッシュ値を取得する
-        """
+        """区間[l,r)のハッシュ値を取得する"""
         return (self.hash[r] - self.hash[l] * self.pow[r - l]) % self.mod
 
     def lcp(self, b: int, bn: int) -> int:
-        """
-        2つのRollingHashの最長共通接頭辞を返す
+        """2つのRollingHashの最長共通接頭辞を返す
+
         bがhashでbnがそのhashの長さです
         """
-
         left, right = 0, min(self.n, bn)
 
         while right - left > 1:

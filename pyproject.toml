@@ -14,5 +14,44 @@ line-length = 88
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["E741", "ANN001", "S101", "D102", "D101", "D100", "PT018"]
+ignore = [
+  "E741",
+  "ANN001",
+  "S101",
+  "D102",
+  "D101",
+  "D100",
+  "PT018",
+  "D400",
+  "D415",
+  "FBT001",
+  "FBT002",
+  "EM101",
+  "N806",
+  "PLW2901",
+  "N803",
+  "ANN401",
+  "PLC0415",
+  "RUF001",
+  "C417",
+  "C416",
+  "ANN202",
+  "PERF203",
+  "D105",
+  "ANN204",
+  "N999",
+  "F401",
+  "PLR2004",
+  "RET505",
+  "SIM300",
+  "C901",
+  "RUF002",
+  "RUF005",
+  "PT",
+]
+
+[tool.ruff.per-file-ignores]
+"libs/yn_func.py" = ["N802", "D", "PLR1722", "FBT003", "T201"]
+"code" = ["ALL"]
+"libs/memo.py" = ["ALL"]
 

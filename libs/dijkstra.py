@@ -1,12 +1,13 @@
 import heapq
-from typing import List, Tuple
 
 
 def dijkstra(
-    graph: List[List[Tuple[int]]], startpoint: int = 0, output_prev: bool = False
-) -> List[int] | Tuple[List[int], List[int]]:
-    """
-    ダイクストラ法です
+    graph: list[list[tuple[int]]],
+    startpoint: int = 0,
+    output_prev: bool = False,
+) -> list[int] | tuple[list[int], list[int]]:
+    """ダイクストラ法のライブラリ
+
     GraphW構造体を使う場合は、allメソッドで、そんまま入れてください
     定数倍速いのかは分かりません(いつも使っているフォーマット)
     経路復元したい場合は、output_prevをTrueにすればprevも返ってくるので、それを使用して復元してください
@@ -16,6 +17,7 @@ def dijkstra(
     prev = [-1] * len(graph)
     if not 0 <= startpoint < len(graph):
         raise IndexError("あのー0-indexedですか?")
+
     used[startpoint] = 0
     PQ = [(0, startpoint)]
 
@@ -38,5 +40,5 @@ def dijkstra(
 
     if not output_prev:
         return used
-    else:
-        return used, prev
+
+    return used, prev

@@ -1,8 +1,6 @@
-from typing import List
+def manacher_algorithm(S: str) -> list[int]:
+    """Manacher algorithm
 
-
-def manacher_algorithm(S: str) -> List[int]:
-    """
     res_i = S_iを中心とした最長の回文の半径
     """
     # いまいち原理は分からないけどうまいことメモ化してそう

@@ -1,10 +1,7 @@
-from typing import List
-
-
 # 数学型関数
 def is_prime(n: int) -> int:
-    """
-    素数判定します
+    """素数判定
+
     計算量は定数時間です。正確には、繰り返し二乗法の計算量によりです
     アルゴリズムはミラーラビンの素数判定を使用しています
     nが2^64を越えると動作しません
@@ -15,7 +12,7 @@ def is_prime(n: int) -> int:
     def f(a, t, n):
         x = pow(a, t, n)
         nt = n - 1
-        while t != nt and x != 1 and x != nt:
+        while t != nt and x not in (x, nt):
             x = pow(x, 2, n)
             t <<= 1
 
@@ -45,13 +42,13 @@ def is_prime(n: int) -> int:
     return True
 
 
-def eratosthenes(n: int) -> List[int]:
-    """
+def eratosthenes(n: int) -> list[int]:
+    """エラトステネスの篩
+
     n以下の素数を列挙します
     計算量は、O(n log log n)です
     先程の素数判定法で列挙するよりも、少し速いです
     列挙した素数は昇順に並んでいます
-    アルゴリズムはエラトステネスです
     """
     primes = [True] * (n + 1)
     primes[0], primes[1] = False, False
@@ -66,8 +63,9 @@ def eratosthenes(n: int) -> List[int]:
     return [i for i, p in enumerate(primes) if p]
 
 
-def calc_divisors(n: int):
-    """
+def calc_divisors(n: int) -> list[int]:
+    """約数列挙
+
     Nの約数列挙します
     計算量は、√Nです
     約数は昇順に並んでいます
@@ -88,8 +86,9 @@ def calc_divisors(n: int):
     return sorted(result)
 
 
-def factorization(n: int) -> List[List[int]]:
-    """
+def factorization(n: int) -> list[list[int]]:
+    """素因数分解
+
     nを素因数分解します
     計算量は、√Nです(要改善)
     複数回素因数分解を行なう場合は、√N以下の素数を列挙したので試し割りした法が速いです
@@ -113,15 +112,14 @@ def factorization(n: int) -> List[List[int]]:
     return result
 
 
-def factorization_plural(L: List[int]) -> List[List[List[int]]]:
-    """
-    複数の数の素因数分解を行ないます
+def factorization_plural(L: list[int]) -> list[list[list[int]]]:
+    """複数の数の素因数分解
+
     計算量は、O(N * (√max(L) log log √max(L)))
     みたいな感じです
 
     最初に素数を列挙するため、普通の素因数分解より効率がいいです
     """
-    res = []
     primes = eratosthenes(int(max(L) ** 0.5) + 20)
 
     def solve(n):
@@ -143,22 +141,20 @@ def factorization_plural(L: List[int]) -> List[List[List[int]]]:
 
         return t
 
-    for n in L:
-        res.append(solve(n))
-
-    return res
+    return [solve(n) for n in L]
 
 
 def simple_sigma(n: int) -> int:
-    """
-    1からnまでの総和を求める関数
+    """1からnまでの和
+
     つまり和の公式
     """
     return (n * (n + 1)) // 2
 
 
 def comb(n: int, r: int, mod: int | None = None) -> int:
-    """
+    """二項係数
+
     高速なはずの二項係数
     modを指定すれば、mod付きになる
     """

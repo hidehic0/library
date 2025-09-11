@@ -1,10 +1,11 @@
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 
 class DualSegmentTree:
-    def __init__(self, op: Callable[[Any, Any], Any], e: Any, n: int) -> None:
-        """
-        区間作用/一点取得のセグメント木
+    def __init__(self, op: Callable[[Any, Any], Any], e, n: int) -> None:
+        """区間作用/一点取得のセグメント木
+
         opは区間作用用の関数
         eは初期値
         vは長さ
@@ -16,9 +17,7 @@ class DualSegmentTree:
         self.data = [e] * (self.n * 2)
 
     def apply(self, l, r, x) -> None:
-        """
-        区間[l,r)にxを適用
-        """
+        """区間[l,r)にxを適用"""
         assert 0 <= l <= r <= self.n
         l += self.n
         r += self.n
@@ -35,9 +34,7 @@ class DualSegmentTree:
             r >>= 1
 
     def get(self, p: int) -> Any:
-        """
-        pの値を取得する
-        """
+        """pの値を取得する"""
         assert 0 <= p < self.n
 
         res = self._e

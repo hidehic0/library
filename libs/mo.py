@@ -1,16 +1,17 @@
 import math
-from typing import Any, Callable, List
+from collections.abc import Callable
+from typing import Any
 
 
 def mo_algorithm(
     N: int,
-    queries: List[Any],
+    queries: list[Any],
     add: Callable[[int], Any],
     delete: Callable[[int], Any],
     getvalue: Callable[[], Any],
-) -> List[Any]:
-    """
-    Mo's algorithmの関数
+) -> list[Any]:
+    """Mo's algorithm
+
     queriesは、(左端, 右端)で1-indexed
     addはあるindexが追加される時の値を現在の値にする
     deleteはあるindexが削除される時の値を現在の値にする

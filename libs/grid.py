@@ -1,13 +1,12 @@
+from collections.abc import Callable
+
+
 def coordinate_check(x: int, y: int, H: int, W: int) -> bool:
-    """
-    座標がグリッドの範囲内にあるかチェックする関数
+    """座標がグリッドの範囲内にあるかチェックする関数
+
     0-indexedが前提
     """
-
     return 0 <= x < H and 0 <= y < W
-
-
-from typing import List, Tuple
 
 
 def grid_moves(
@@ -15,11 +14,11 @@ def grid_moves(
     y: int,
     H: int,
     W: int,
-    moves: List[Tuple[int]] = [(0, 1), (0, -1), (1, 0), (-1, 0)],
-    *check_funcs,
-) -> List[Tuple[int]]:
-    """
-    現在の座標から、移動可能な座標をmovesをもとに列挙します。
+    moves: list[tuple[int]] | None = None,
+    *check_funcs: list[Callable[[int, int], bool]],
+) -> list[tuple[int]]:
+    """現在の座標から、移動可能な座標をmovesをもとに列挙します。
+
     xとyは現在の座標
     HとWはグリッドのサイズ
     movesは移動する座標がいくつかを保存する
@@ -27,6 +26,9 @@ def grid_moves(
     なおcheck_funcsは引数がxとyだけというのが条件
     追加の判定関数は、弾く場合は、False それ以外ならTrueで
     """
+    if moves is None:
+        moves = ([(0, 1), (0, -1), (1, 0), (-1, 0)],)
+
     res = []
 
     for mx, my in moves:

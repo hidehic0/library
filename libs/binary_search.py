@@ -1,11 +1,14 @@
-from typing import Callable
+from typing.abc import Callable
 
 
 def binary_search(
-    fn: Callable[[int], bool], right: int = 0, left: int = -1, return_left: bool = True
+    fn: Callable[[int], bool],
+    right: int = 0,
+    left: int = -1,
+    return_left: bool = True,
 ) -> int:
-    """
-    二分探索の抽象的なライブラリ
+    """二分探索の抽象的なライブラリ
+
     評価関数の結果に応じて、二分探索する
     最終的にはleftを出力します
 

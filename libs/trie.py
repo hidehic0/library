@@ -1,13 +1,17 @@
 # Trie木
 class Trie:
     class Data:
+        """trie木のノード"""
+
         def __init__(self, value, ind):
+            """trie木のノード"""
             self.count = 1
             self.value = value
             self.childs = {}
             self.ind = ind
 
     def __init__(self):
+        """Trie木"""
         self.data = [self.Data("ab", 0)]  # 初期値はabにして被らないようにする
 
     def add(self, value: str) -> int:

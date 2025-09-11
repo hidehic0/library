@@ -123,7 +123,8 @@ class TestHeap(unittest.TestCase):
         self.assertEqual(L[0], 1)
 
         self.assertListEqual(
-            sorted(test_cases), [L.pop() for _ in range(len(test_cases))]
+            sorted(test_cases),
+            [L.pop() for _ in range(len(test_cases))],
         )
 
         test_cases = [(4, 1), (3, 2), (5, 3), (1, 4)]

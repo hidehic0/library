@@ -1,9 +1,7 @@
-from typing import List, Tuple
-
-
 class EulerTour:
-    def __init__(self, edges: List[Tuple[int, int, int]], root: int = 0) -> None:
-        """
+    def __init__(self, edges: list[tuple[int, int, int]], root: int = 0) -> None:
+        """オイラーツアーのライブラリ
+
         edges[i] = (u, v, w)
         なお閉路がない、連結という前提 エラー処理をしていない
 
@@ -14,15 +12,14 @@ class EulerTour:
         Warning:
         ac-library-pythonを__init__内で使用しているので注意
         定数倍が遅い事に注意 あとメモリも注意 結構リストを使用している
-        """
-        # assert len(edges) >= 1
 
+        """
         from atcoder.segtree import SegTree
 
         self.edges = edges
         self._n = max([max(u, v) for u, v, w in edges]) + 1
         self.root = root
-        self.graph: List[List[Tuple[int, int, int]]] = [[] for _ in [0] * self._n]
+        self.graph: list[list[tuple[int, int, int]]] = [[] for _ in [0] * self._n]
 
         for i, (u, v, w) in enumerate(edges):
             self.graph[u].append((v, w, i))
@@ -37,12 +34,10 @@ class EulerTour:
             [(d, i) for i, d in enumerate(self.depth)],
         )
 
-        return
-
     def _build(self) -> None:
-        self.euler_tour: List[Tuple[int, int]] = [(0, -1)]
-        self.edge_cost: List[int] = [0]
-        self.depth: List[int] = [0]
+        self.euler_tour: list[tuple[int, int]] = [(0, -1)]
+        self.edge_cost: list[int] = [0]
+        self.depth: list[int] = [0]
 
         def dfs(cur: int, p: int = -1, d: int = 0) -> None:
             for nxt, w, i in self.graph[cur]:
@@ -78,8 +73,6 @@ class EulerTour:
             self.last_arrival[u] = i
 
     def lca(self, a: int, b: int) -> int:
-        # assert 0 <= a < self._n and 0 <= b < self._n
-
         l, r = (
             min(self.first_arrival[a], self.first_arrival[b]),
             max(self.last_arrival[a], self.last_arrival[b]),
@@ -92,10 +85,7 @@ class EulerTour:
         return self.segtree_edgecost.prod(0, self.first_arrival[u] + 1)
 
     def path_query(self, a: int, b: int) -> int:
-        """
-        aからbへの最短経路
-        """
-        # assert 0 <= a < self._n and 0 <= b < self._n
+        """aからbへの最短経路"""
         try:
             l = self.lca(a, b)
         except IndexError:
@@ -108,6 +98,5 @@ class EulerTour:
         )
 
     def change_edge_cost(self, i: int, w: int) -> None:
-        # assert 0 <= i < len(self.edges)
         self.segtree_edgecost.set(self.edge_plus[i], w)
         self.segtree_edgecost.set(self.edge_minus[i], -w)

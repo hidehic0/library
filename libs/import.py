@@ -30,7 +30,7 @@ from collections import Counter, defaultdict, deque
 from itertools import accumulate, combinations, permutations
 from math import gcd, lcm, pi
 from operator import itemgetter
-from typing import Any, List, Tuple
+from typing import Any
 
 # from atcoder.segtree import SegTree
 # from atcoder.lazysegtree import LazySegTree

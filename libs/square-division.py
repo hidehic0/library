@@ -1,9 +1,14 @@
 import math
-from typing import Any, Callable, List
+from collections.abc import Callable
+from typing import Any
 
 
 class SquareDivision:
-    def __init__(self, lis: List[Any], op: Callable[[Any, Any], Any]) -> None:
+    def __init__(self, lis: list[Any], op: Callable[[Any, Any], Any]) -> None:
+        """平方分割ライブラリ
+
+        ほぼACLのセグ木と同じ
+        """
         self.n = len(lis)
         self.op = op
         self.block_size = math.isqrt(self.n)
@@ -25,9 +30,7 @@ class SquareDivision:
         return (i + self.block_size - 1) // self.block_size
 
     def prod(self, l: int, r: int) -> Any:
-        """
-        rは0-indexedなのに注意してください
-        """
+        """rは0-indexedなのに注意してください"""
         assert 0 <= l <= r < self.n
 
         l_block_left = self.get_block_index_left(l)
@@ -70,10 +73,14 @@ class SquareDivision:
 class SquareDivisionSpeedy(SquareDivision):
     def __init__(
         self,
-        lis: List[Any],
+        lis: list[Any],
         op: Callable[[Any, Any], Any],
         delete: Callable[[Any, Any], Any],
     ) -> None:
+        """その値を削除する関数がある場合の平方分割ライブラリ
+
+        更新は高速だがクエリがボトルネックなのであまり変わらない
+        """
         self.delete = delete
         super().__init__(lis, op)
 

@@ -1,5 +1,6 @@
 class PrefixSum2D:
     def __init__(self, h: int, w: int) -> None:
+        """二次元累積和のライブラリ"""
         self.data = [[0] * (w + 1) for _ in [0] * (h + 1)]
         self.builded = False
         self.h = h
@@ -21,8 +22,11 @@ class PrefixSum2D:
             for i in range(self.h):
                 self.data[i + 1][k] += self.data[i][k]
 
+        self.builded = True
+
     def prod(self, ax: int, ay: int, bx: int, by: int) -> int:
         assert 0 <= ax <= bx < self.h and 0 <= ay <= by < self.w
+        assert self.builded
 
         return (
             self.data[bx + 1][by + 1]

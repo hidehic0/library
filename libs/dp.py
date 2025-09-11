@@ -1,10 +1,9 @@
 # DPのテンプレート
-from typing import List
 
 
-def partial_sum_dp(lis: List[int], X: int) -> List[bool]:
-    """
-    部分和dpのテンプレート
+def partial_sum_dp(lis: list[int], X: int) -> list[bool]:
+    """部分和dpのテンプレート
+
     lisは品物です
     dp配列の長さは、Xにします
     計算量は、O(X*len(L))みたいな感じ
@@ -28,8 +27,8 @@ def partial_sum_dp(lis: List[int], X: int) -> List[bool]:
 
 
 def knapsack_dp(lis: list[list[int]], W: int) -> int:
-    """
-    ナップサック問題を一次元DPで解く
+    """ナップサックdpのテンプレート
+
     lis: 品物のリスト [[重さ, 価値], ...]
     W: ナップサックの容量
     戻り値: 最大価値
@@ -41,16 +40,17 @@ def knapsack_dp(lis: list[list[int]], W: int) -> int:
 
     for w, v in lis:
         if w < 0 or v < 0:
-            raise ValueError("Weight and value must be non-negative")
+            msg = "Weight and value must be non-negative"
+            raise ValueError(msg)
         for k in reversed(range(W - w + 1)):
             dp[k + w] = max(dp[k + w], dp[k] + v)
 
     return dp[W]
 
 
-def article_breakdown(lis: List[List[int]]) -> List[List[int]]:
-    """
-    個数制限付きナップサックの品物を分解します
+def article_breakdown(lis: list[list[int]]) -> list[list[int]]:
+    """個数制限付きナップサック問題用の品物を分解する関数
+
     個数の値が、各品物の一番右にあれば正常に動作します
     """
     res = []

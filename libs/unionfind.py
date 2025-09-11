@@ -1,38 +1,33 @@
 from collections import defaultdict
-from typing import List
 
 
 # UnionFind木
 class UnionFind:
-    """
-    rollbackをデフォルトで装備済み
-    計算量は、経路圧縮を行わないため、基本的なUnionFindの動作は、一回あたり、O(log N)
-    rollbackは、一回あたり、O(1)で行える。
-    """
-
     def __init__(self, n: int) -> None:
+        """UnionFind
+
+        rollbackをデフォルトで装備済み
+        計算量は経路圧縮を行わないため、基本的なUnionFindの動作は、一回あたり、O(log N)
+        rollbackは、一回あたり、O(1)で行える。
+        """
         self.size = n
         self.data = [-1] * n
         self.hist = []
 
     def leader(self, vtx: int) -> int:
-        """
-        頂点vtxの親を出力します
-        """
+        """頂点vtxの親を出力します"""
         if self.data[vtx] < 0:
             return vtx
 
         return self.leader(self.data[vtx])
 
-    def same(self, a: int, b: int):
-        """
-        aとbが連結しているかどうか判定します
-        """
+    def same(self, a: int, b: int) -> bool:
+        """aとbが連結しているかどうか判定します"""
         return self.leader(a) == self.leader(b)
 
     def merge(self, a: int, b: int) -> bool:
-        """
-        aとbを結合します
+        """aとbを結合します
+
         leaderが同じでも、履歴には追加します
         """
         ra, rb = self.leader(a), self.leader(b)
@@ -52,9 +47,9 @@ class UnionFind:
 
         return True
 
-    def rollback(self):
-        """
-        undoします
+    def rollback(self) -> bool:
+        """Undo
+
         redoはありません
         """
         if not self.hist:
@@ -65,15 +60,10 @@ class UnionFind:
         self.data[rb] = db
         return True
 
-    def all(self) -> List[List[int]]:
+    def all(self) -> list[list[int]]:
         D = defaultdict(list)
 
         for i in range(self.size):
             D[self.leader(i)].append(i)
 
-        res = []
-
-        for l in D.values():
-            res.append(l)
-
-        return res
+        return [l for l in D.values()]

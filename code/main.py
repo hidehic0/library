@@ -30,7 +30,7 @@ from collections import Counter, defaultdict, deque
 from itertools import accumulate, combinations, permutations
 from math import gcd, lcm, pi
 from operator import itemgetter
-from typing import Any, List, Tuple
+from typing import Any
 
 # from atcoder.segtree import SegTree
 # from atcoder.lazysegtree import LazySegTree
@@ -47,59 +47,38 @@ sys.setrecursionlimit(5 * 10**5)
 import io
 import os
 import sys
-from typing import Any, List
-
-# インタラクティブ問題の時はIS_INTERACTIVEをTrueにしましょう
-# IS_INTERACTIVE = False
-
-# 標準入力関数
-# if sys.argv[0] == "Main.py":
-#     if not IS_INTERACTIVE:
-#         input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline().decode().rstrip
+from typing import Any
 
 
 def s() -> str:
-    """
-    一行に一つのstringをinput
-    """
+    """一行に一つのstringをinput"""
     return input()
 
 
-def sl() -> List[str]:
-    """
-    一行に複数のstringをinput
-    """
+def sl() -> list[str]:
+    """一行に複数のstringをinput"""
     return s().split()
 
 
 def ii() -> int:
-    """
-    一つのint
-    """
+    """一つのint"""
     return int(s())
 
 
-def il(add_num: int = 0) -> List[int]:
-    """
-    一行に複数のint
-    """
+def il(add_num: int = 0) -> list[int]:
+    """一行に複数のint"""
     return list(map(lambda i: int(i) + add_num, sl()))
 
 
-def li(n: int, func, *args) -> List[List[Any]]:
-    """
-    複数行の入力をサポート
-    """
+def li(n: int, func, *args: list[Any]) -> list[list[Any]]:
+    """複数行の入力をサポート"""
     return [func(*args) for _ in [0] * n]
-
-
-from typing import List
 
 
 # 数学型関数
 def is_prime(n: int) -> int:
-    """
-    素数判定します
+    """素数判定
+
     計算量は定数時間です。正確には、繰り返し二乗法の計算量によりです
     アルゴリズムはミラーラビンの素数判定を使用しています
     nが2^64を越えると動作しません
@@ -110,7 +89,7 @@ def is_prime(n: int) -> int:
     def f(a, t, n):
         x = pow(a, t, n)
         nt = n - 1
-        while t != nt and x != 1 and x != nt:
+        while t != nt and x not in (x, nt):
             x = pow(x, 2, n)
             t <<= 1
 
@@ -140,13 +119,13 @@ def is_prime(n: int) -> int:
     return True
 
 
-def eratosthenes(n: int) -> List[int]:
-    """
+def eratosthenes(n: int) -> list[int]:
+    """エラトステネスの篩
+
     n以下の素数を列挙します
     計算量は、O(n log log n)です
     先程の素数判定法で列挙するよりも、少し速いです
     列挙した素数は昇順に並んでいます
-    アルゴリズムはエラトステネスです
     """
     primes = [True] * (n + 1)
     primes[0], primes[1] = False, False
@@ -161,8 +140,9 @@ def eratosthenes(n: int) -> List[int]:
     return [i for i, p in enumerate(primes) if p]
 
 
-def calc_divisors(n: int):
-    """
+def calc_divisors(n: int) -> list[int]:
+    """約数列挙
+
     Nの約数列挙します
     計算量は、√Nです
     約数は昇順に並んでいます
@@ -183,8 +163,9 @@ def calc_divisors(n: int):
     return sorted(result)
 
 
-def factorization(n: int) -> List[List[int]]:
-    """
+def factorization(n: int) -> list[list[int]]:
+    """素因数分解
+
     nを素因数分解します
     計算量は、√Nです(要改善)
     複数回素因数分解を行なう場合は、√N以下の素数を列挙したので試し割りした法が速いです
@@ -208,15 +189,14 @@ def factorization(n: int) -> List[List[int]]:
     return result
 
 
-def factorization_plural(L: List[int]) -> List[List[List[int]]]:
-    """
-    複数の数の素因数分解を行ないます
+def factorization_plural(L: list[int]) -> list[list[list[int]]]:
+    """複数の数の素因数分解
+
     計算量は、O(N * (√max(L) log log √max(L)))
     みたいな感じです
 
     最初に素数を列挙するため、普通の素因数分解より効率がいいです
     """
-    res = []
     primes = eratosthenes(int(max(L) ** 0.5) + 20)
 
     def solve(n):
@@ -238,22 +218,20 @@ def factorization_plural(L: List[int]) -> List[List[List[int]]]:
 
         return t
 
-    for n in L:
-        res.append(solve(n))
-
-    return res
+    return [solve(n) for n in L]
 
 
 def simple_sigma(n: int) -> int:
-    """
-    1からnまでの総和を求める関数
+    """1からnまでの和
+
     つまり和の公式
     """
     return (n * (n + 1)) // 2
 
 
 def comb(n: int, r: int, mod: int | None = None) -> int:
-    """
+    """二項係数
+
     高速なはずの二項係数
     modを指定すれば、mod付きになる
     """
@@ -279,38 +257,35 @@ def comb(n: int, r: int, mod: int | None = None) -> int:
 
 
 # 多次元配列作成
-from typing import List, Any
+from typing import Any
 
 
-def create_array1(n: int, default: Any = 0) -> List[Any]:
-    """
-    1次元配列を初期化する関数
-    """
+def create_array1(n: int, default=0) -> list[Any]:
+    """1次元配列を初期化する関数"""
     return [default] * n
 
 
-def create_array2(a: int, b: int, default: Any = 0) -> List[List[Any]]:
-    """
-    2次元配列を初期化する関数
-    """
+def create_array2(a: int, b: int, default=0) -> list[list[Any]]:
+    """2次元配列を初期化する関数"""
     return [[default] * b for _ in [0] * a]
 
 
-def create_array3(a: int, b: int, c: int, default: Any = 0) -> List[List[List[Any]]]:
-    """
-    3次元配列を初期化する関数
-    """
+def create_array3(a: int, b: int, c: int, default=0) -> list[list[list[Any]]]:
+    """3次元配列を初期化する関数"""
     return [[[default] * c for _ in [0] * b] for _ in [0] * a]
 
 
-from typing import Callable
+from typing.abc import Callable
 
 
 def binary_search(
-    fn: Callable[[int], bool], right: int = 0, left: int = -1, return_left: bool = True
+    fn: Callable[[int], bool],
+    right: int = 0,
+    left: int = -1,
+    return_left: bool = True,
 ) -> int:
-    """
-    二分探索の抽象的なライブラリ
+    """二分探索の抽象的なライブラリ
+
     評価関数の結果に応じて、二分探索する
     最終的にはleftを出力します
 
@@ -334,45 +309,52 @@ def binary_search(
     return left if return_left else right
 
 
-def mod_add(a: int, b: int, mod: int):
-    """
-    足し算してmodを取った値を出力
+from typing_extensions import Self
+
+
+def mod_add(a: int, b: int, mod: int) -> int:
+    """足し算してmodを取った値を出力
+
     O(1)
     """
     return (a + b) % mod
 
 
-def mod_sub(a: int, b: int, mod: int):
-    """
-    引き算してmodを取った値を出力
+def mod_sub(a: int, b: int, mod: int) -> int:
+    """引き算してmodを取った値を出力
+
     O(1)
     """
     return (a - b) % mod
 
 
-def mod_mul(a: int, b: int, mod: int):
-    """
-    掛け算してmodを取った値を出力
+def mod_mul(a: int, b: int, mod: int) -> int:
+    """掛け算してmodを取った値を出力
+
     O(1)
     """
     return (a * b) % mod
 
 
-def mod_div(a: int, b: int, mod: int):
-    """
-    割り算してmodを取った値を出力
+def mod_div(a: int, b: int, mod: int) -> int:
+    """割り算してmodを取った値を出力
+
     フェルマーの小定理を使って計算します
     O(log mod)
     """
-    return (a * pow(b, mod - 2, mod)) % mod
+    return (a * pow(b, -1, mod)) % mod
 
 
 class ModInt:
     def __init__(self, x: int, mod: int = 998244353) -> None:
+        """ModInt
+
+        リストで使うと参照渡しになるので注意
+        """
         self.x = x % mod
         self.mod = mod
 
-    def val(self):
+    def val(self) -> int:
         return self.x
 
     def rhs(self, rhs) -> int:
@@ -381,7 +363,7 @@ class ModInt:
     def __add__(self, rhs) -> int:
         return mod_add(self.x, self.rhs(rhs), self.mod)
 
-    def __iadd__(self, rhs) -> "ModInt":
+    def __iadd__(self, rhs) -> Self:
         self.x = self.__add__(rhs)
 
         return self
@@ -389,7 +371,7 @@ class ModInt:
     def __sub__(self, rhs) -> int:
         return mod_sub(self.x, self.rhs(rhs), self.mod)
 
-    def __isub__(self, rhs) -> "ModInt":
+    def __isub__(self, rhs) -> Self:
         self.x = self.__sub__(rhs)
 
         return self
@@ -427,10 +409,14 @@ class ModInt:
     def __ne__(self, rhs) -> bool:
         return self.rhs(rhs) != self.x
 
+    def __hash__(self) -> int:
+        return hash(self.x)
+
 
 # YesNo関数
 def YesNoTemplate(state: bool, upper: bool = False) -> str:
-    """
+    """YesNo関数のテンプレート
+
     stateがTrueなら、upperに応じてYes,YESをreturn
     stateがFalseなら、upperに応じてNo,NOをreturnする
     """
@@ -476,16 +462,15 @@ def NE(state: bool, upper: bool = False) -> bool | None:
     exit()
 
 
+from collections.abc import Callable
+
+
 def coordinate_check(x: int, y: int, H: int, W: int) -> bool:
-    """
-    座標がグリッドの範囲内にあるかチェックする関数
+    """座標がグリッドの範囲内にあるかチェックする関数
+
     0-indexedが前提
     """
-
     return 0 <= x < H and 0 <= y < W
-
-
-from typing import List, Tuple
 
 
 def grid_moves(
@@ -493,11 +478,11 @@ def grid_moves(
     y: int,
     H: int,
     W: int,
-    moves: List[Tuple[int]] = [(0, 1), (0, -1), (1, 0), (-1, 0)],
-    *check_funcs,
-) -> List[Tuple[int]]:
-    """
-    現在の座標から、移動可能な座標をmovesをもとに列挙します。
+    moves: list[tuple[int]] | None = None,
+    *check_funcs: list[Callable[[int, int], bool]],
+) -> list[tuple[int]]:
+    """現在の座標から、移動可能な座標をmovesをもとに列挙します。
+
     xとyは現在の座標
     HとWはグリッドのサイズ
     movesは移動する座標がいくつかを保存する
@@ -505,6 +490,9 @@ def grid_moves(
     なおcheck_funcsは引数がxとyだけというのが条件
     追加の判定関数は、弾く場合は、False それ以外ならTrueで
     """
+    if moves is None:
+        moves = ([(0, 1), (0, -1), (1, 0), (-1, 0)],)
+
     res = []
 
     for mx, my in moves:
@@ -522,25 +510,21 @@ def grid_moves(
     return res
 
 
-from typing import List, Tuple
-
-
-def coordinates_to_id(H: int, W: int) -> Tuple[List[List[int]], List[Tuple[int]]]:
-    """
-    座標にID変換します
+def coordinates_to_id(h: int, w: int) -> tuple[list[list[int]], list[tuple[int, int]]]:
+    """座標を一次元のindexに変換する関数
 
     返り値は、
     最初のが、座標からid
     二つめのが、idから座標
     です
     """
-    ItC = [[-1] * W for _ in [0] * H]
-    CtI = [(-1, -1) for _ in [0] * (H * W)]
+    ItC = [[-1] * w for _ in [0] * h]
+    CtI = [(-1, -1) for _ in [0] * (h * w)]
 
     i = 0
 
-    for x in range(H):
-        for y in range(W):
+    for x in range(h):
+        for y in range(w):
             ItC[x][y] = i
             CtI[i] = (x, y)
             i += 1
@@ -549,14 +533,15 @@ def coordinates_to_id(H: int, W: int) -> Tuple[List[List[int]], List[Tuple[int]]
 
 
 import heapq
-from typing import List, Tuple
 
 
 def dijkstra(
-    graph: List[List[Tuple[int]]], startpoint: int = 0, output_prev: bool = False
-) -> List[int] | Tuple[List[int], List[int]]:
-    """
-    ダイクストラ法です
+    graph: list[list[tuple[int]]],
+    startpoint: int = 0,
+    output_prev: bool = False,
+) -> list[int] | tuple[list[int], list[int]]:
+    """ダイクストラ法のライブラリ
+
     GraphW構造体を使う場合は、allメソッドで、そんまま入れてください
     定数倍速いのかは分かりません(いつも使っているフォーマット)
     経路復元したい場合は、output_prevをTrueにすればprevも返ってくるので、それを使用して復元してください
@@ -566,6 +551,7 @@ def dijkstra(
     prev = [-1] * len(graph)
     if not 0 <= startpoint < len(graph):
         raise IndexError("あのー0-indexedですか?")
+
     used[startpoint] = 0
     PQ = [(0, startpoint)]
 
@@ -588,16 +574,13 @@ def dijkstra(
 
     if not output_prev:
         return used
-    else:
-        return used, prev
+
+    return used, prev
 
 
-from typing import List
+def getpath(prev_lis: list[int], goal_point: int) -> list[int]:
+    """経路復元ライブラリ
 
-
-def getpath(prev_lis: List[int], goal_point: int) -> List[int]:
-    """
-    経路復元をします
     dijkstra関数を使う場合、output_prevをTrueにして返ってきた、prevを引数として用います
     他の場合は、移動の時、usedを付けるついでに、prevに現在の頂点を付けてあげるといいです
     """
@@ -612,12 +595,11 @@ def getpath(prev_lis: List[int], goal_point: int) -> List[int]:
 
 
 # DPのテンプレート
-from typing import List
 
 
-def partial_sum_dp(lis: List[int], X: int) -> List[bool]:
-    """
-    部分和dpのテンプレート
+def partial_sum_dp(lis: list[int], X: int) -> list[bool]:
+    """部分和dpのテンプレート
+
     lisは品物です
     dp配列の長さは、Xにします
     計算量は、O(X*len(L))みたいな感じ
@@ -641,8 +623,8 @@ def partial_sum_dp(lis: List[int], X: int) -> List[bool]:
 
 
 def knapsack_dp(lis: list[list[int]], W: int) -> int:
-    """
-    ナップサック問題を一次元DPで解く
+    """ナップサックdpのテンプレート
+
     lis: 品物のリスト [[重さ, 価値], ...]
     W: ナップサックの容量
     戻り値: 最大価値
@@ -654,16 +636,17 @@ def knapsack_dp(lis: list[list[int]], W: int) -> int:
 
     for w, v in lis:
         if w < 0 or v < 0:
-            raise ValueError("Weight and value must be non-negative")
+            msg = "Weight and value must be non-negative"
+            raise ValueError(msg)
         for k in reversed(range(W - w + 1)):
             dp[k + w] = max(dp[k + w], dp[k] + v)
 
     return dp[W]
 
 
-def article_breakdown(lis: List[List[int]]) -> List[List[int]]:
-    """
-    個数制限付きナップサックの品物を分解します
+def article_breakdown(lis: list[list[int]]) -> list[list[int]]:
+    """個数制限付きナップサック問題用の品物を分解する関数
+
     個数の値が、各品物の一番右にあれば正常に動作します
     """
     res = []
@@ -677,43 +660,33 @@ def article_breakdown(lis: List[List[int]]) -> List[List[int]]:
     return res
 
 
-from typing import List, Tuple
+def compress_1d(points: list[int] | tuple[int]) -> list[int]:
+    """一次元座標圧縮
 
-
-def compress_1d(points: List[int] | Tuple[int]) -> List[int]:
-    """
-    一次元座標圧縮します
     計算量は、O(N log N)です
 
     lとrは、まとめて入れる事で、座圧できます
     """
-    res = []
     d = {num: ind for ind, num in enumerate(sorted(set(points)))}
 
-    for a in points:
-        res.append(d[a])
-
-    return res
+    return [d[a] for a in points]
 
 
-def compress_2d(points):
-    """
-    2次元座標圧縮を行う関数
+def compress_2d(points) -> list[tuple[int, int]]:
+    """二次元座標圧縮
+
     入力: points - [(x1, y1), (x2, y2), ...] の形式の座標リスト
     出力: 圧縮後の座標リストと、元の座標から圧縮後の座標へのマッピング
     """
     # x座標とy座標を分離
-    x_coords = sorted(set(x for x, y in points))  # 重複を削除してソート
-    y_coords = sorted(set(y for x, y in points))
+    x_coords = sorted({x for x, y in points})  # 重複を削除してソート
+    y_coords = sorted({y for x, y in points})
 
     # 座標から圧縮後の値へのマッピング辞書を作成
     x_map = {val: idx for idx, val in enumerate(x_coords)}
     y_map = {val: idx for idx, val in enumerate(y_coords)}
 
-    # 圧縮後の座標リストを作成
-    compressed = [(x_map[x], y_map[y]) for x, y in points]
-
-    return compressed
+    return [(x_map[x], y_map[y]) for x, y in points]
 
 
 # ac_libraryのメモ
@@ -733,18 +706,20 @@ eは初期化する値
 
 vは配列の長さまたは、初期化する内容
 """
-from typing import Any, Callable, List
+from collections.abc import Callable
+from typing import Any
 
 
 def rerooting(
-    G: List[List[int]],
+    G: list[list[int]],
     merge: Callable[[Any, Any], Any],
     add_root: Callable[[int, Any], Any],
     e,
-) -> List[Any]:
+) -> list[Any]:
+    """全方位木dp"""
     _n = len(G)
-    dp: List[List[Any]] = [[]] * _n
-    ans: List[Any] = [e] * _n
+    dp: list[list[Any]] = [[]] * _n
+    ans: list[Any] = [e] * _n
 
     def _dfs(u: int, p: int = -1):
         nonlocal dp, merge, add_root, e
@@ -789,11 +764,9 @@ def rerooting(
     return ans
 
 
-from typing import List
+def manacher_algorithm(S: str) -> list[int]:
+    """Manacher algorithm
 
-
-def manacher_algorithm(S: str) -> List[int]:
-    """
     res_i = S_iを中心とした最長の回文の半径
     """
     # いまいち原理は分からないけどうまいことメモ化してそう
@@ -818,9 +791,6 @@ def manacher_algorithm(S: str) -> List[int]:
     return res
 
 
-from typing import List
-
-
 class RollingHash:
     string: str
     mod: int
@@ -828,8 +798,8 @@ class RollingHash:
     n: int
 
     def __init__(self, string: str, mod: int = (1 << 61) - 1) -> None:
-        """
-        RollingHash構造体
+        """RollingHash構造体
+
         衝突する可能性があるのでmodが違う二つで比較するのが有効
 
         string: 文字列
@@ -850,17 +820,14 @@ class RollingHash:
             self.pow[i + 1] = self.pow[i] * self.base % mod
 
     def get(self, l: int, r: int) -> int:
-        """
-        区間[l,r)のハッシュ値を取得する
-        """
+        """区間[l,r)のハッシュ値を取得する"""
         return (self.hash[r] - self.hash[l] * self.pow[r - l]) % self.mod
 
     def lcp(self, b: int, bn: int) -> int:
-        """
-        2つのRollingHashの最長共通接頭辞を返す
+        """2つのRollingHashの最長共通接頭辞を返す
+
         bがhashでbnがそのhashの長さです
         """
-
         left, right = 0, min(self.n, bn)
 
         while right - left > 1:
@@ -877,16 +844,12 @@ class RollingHash:
 # グラフ構造
 # 無向グラフ
 from collections import deque
-from typing import List, Tuple
 
 
 class Graph:
-    """
-    グラフ構造体
-    """
-
     def __init__(self, N: int, dire: bool = False) -> None:
-        """
+        """グラフ構造体
+
         Nは頂点数、direは有向グラフかです
         """
         self.N = N
@@ -894,11 +857,11 @@ class Graph:
         self.grath = [[] for _ in [0] * self.N]
         self.in_deg = [0] * N
 
-    def new_side(self, a: int, b: int):
-        """
-        注意　0-indexedが前提
-        aとbを辺で繋ぎます
+    def new_side(self, a: int, b: int) -> None:
+        """aとbを辺で繋ぎます
+
         有向グラフなら、aからbだけ、無向グラフなら、aからbと、bからaを繋ぎます
+        注意　0-indexedが前提
         """
         self.grath[a].append(b)
         if self.dire:
@@ -907,47 +870,40 @@ class Graph:
         if not self.dire:
             self.grath[b].append(a)
 
-    def side_input(self):
-        """
-        標準入力で、新しい辺を追加します
-        """
+    def side_input(self) -> None:
+        """標準入力で、新しい辺を追加します"""
         a, b = map(lambda x: int(x) - 1, input().split())
         self.new_side(a, b)
 
-    def input(self, M: int):
-        """
-        標準入力で複数行受け取り、各行の内容で辺を繋ぎます
-        """
+    def input(self, M: int) -> None:
+        """標準入力で複数行受け取り、各行の内容で辺を繋ぎます"""
         for _ in [0] * M:
             self.side_input()
 
-    def get(self, a: int):
-        """
-        頂点aの隣接頂点を出力します
-        """
+    def get(self, a: int) -> list[int]:
+        """頂点aの隣接頂点を出力します"""
         return self.grath[a]
 
-    def all(self) -> List[List[int]]:
-        """
-        グラフの隣接リストをすべて出力します
-        """
+    def all(self) -> list[list[int]]:
+        """グラフの隣接リストをすべて出力します"""
         return self.grath
 
-    def topological(self, unique: bool = False) -> List[int]:
-        """
-        トポロジカルソートします
+    def topological(self, unique: bool = False) -> list[int]:
+        """トポロジカルソートします
+
         有向グラフ限定です
 
         引数のuniqueは、トポロジカルソート結果が、一意に定まらないとエラーを吐きます
         閉路がある、または、uniqueがTrueで一意に定まらなかった時は、[-1]を返します
         """
         if not self.dire:
-            raise ValueError("グラフが有向グラフでは有りません (╥﹏╥)")
+            msg = "グラフが有向グラフでは有りません (╥﹏╥)"
+            raise ValueError(msg)
 
         in_deg = self.in_deg[:]
 
         S: deque[int] = deque([])
-        order: List[int] = []
+        order: list[int] = []
 
         for i in range(self.N):
             if in_deg[i] == 0:
@@ -968,92 +924,76 @@ class Graph:
 
         if sum(in_deg) > 0:
             return [-1]
-        else:
-            return [x for x in order]
+
+        return [x for x in order]
 
 
 class GraphW:
-    """
-    重み付きグラフ
-    """
-
     def __init__(self, N: int, dire: bool = False) -> None:
+        """重み付きグラフ"""
         self.N = N
         self.dire = dire
         self.grath = [[] for _ in [0] * self.N]
 
-    def new_side(self, a: int, b: int, w: int):
-        """
-        注意　0-indexedが前提
-        aとbを辺で繋ぎます
+    def new_side(self, a: int, b: int, w: int) -> None:
+        """aとbを辺で繋ぎます
+
         有向グラフなら、aからbだけ、無向グラフなら、aからbと、bからaを繋ぎます
+        注意　0-indexedが前提
         """
         self.grath[a].append((b, w))
         if not self.dire:
             self.grath[b].append((a, w))
 
-    def side_input(self):
-        """
-        標準入力で、新しい辺を追加します
-        """
+    def side_input(self) -> None:
+        """標準入力で、新しい辺を追加します"""
         a, b, w = map(lambda x: int(x) - 1, input().split())
         self.new_side(a, b, w + 1)
 
-    def input(self, M: int):
-        """
-        標準入力で複数行受け取り、各行の内容で辺を繋ぎます
-        """
+    def input(self, M: int) -> None:
+        """標準入力で複数行受け取り、各行の内容で辺を繋ぎます"""
         for _ in [0] * M:
             self.side_input()
 
-    def get(self, a: int) -> List[Tuple[int]]:
-        """
-        頂点aの隣接頂点を出力します
-        """
+    def get(self, a: int) -> list[tuple[int]]:
+        """頂点aの隣接頂点を出力します"""
         return self.grath[a]
 
-    def all(self) -> List[List[Tuple[int]]]:
-        """
-        グラフの隣接リストをすべて出力します
-        """
+    def all(self) -> list[list[tuple[int]]]:
+        """グラフの隣接リストをすべて出力します"""
         return self.grath
 
 
 from collections import defaultdict
-from typing import List
 
 
 # UnionFind木
 class UnionFind:
-    """
-    rollbackをデフォルトで装備済み
-    計算量は、経路圧縮を行わないため、基本的なUnionFindの動作は、一回あたり、O(log N)
-    rollbackは、一回あたり、O(1)で行える。
-    """
-
     def __init__(self, n: int) -> None:
+        """UnionFind
+
+        rollbackをデフォルトで装備済み
+        計算量は経路圧縮を行わないため、基本的なUnionFindの動作は、一回あたり、O(log N)
+        rollbackは、一回あたり、O(1)で行える。
+        """
         self.size = n
         self.data = [-1] * n
         self.hist = []
 
     def leader(self, vtx: int) -> int:
-        """
-        頂点vtxの親を出力します
-        """
+        """頂点vtxの親を出力します"""
         if self.data[vtx] < 0:
             return vtx
 
         return self.leader(self.data[vtx])
 
-    def same(self, a: int, b: int):
-        """
-        aとbが連結しているかどうか判定します
-        """
+    def same(self, a: int, b: int) -> bool:
+        """aとbが連結しているかどうか判定します"""
         return self.leader(a) == self.leader(b)
 
     def merge(self, a: int, b: int) -> bool:
-        """
-        aとbを結合します
+        """aとbを結合します
+
         leaderが同じでも、履歴には追加します
         """
         ra, rb = self.leader(a), self.leader(b)
@@ -1073,9 +1013,9 @@ class UnionFind:
 
         return True
 
-    def rollback(self):
-        """
-        undoします
+    def rollback(self) -> bool:
+        """Undo
+
         redoはありません
         """
         if not self.hist:
@@ -1086,26 +1026,19 @@ class UnionFind:
         self.data[rb] = db
         return True
 
-    def all(self) -> List[List[int]]:
+    def all(self) -> list[list[int]]:
         D = defaultdict(list)
 
         for i in range(self.size):
             D[self.leader(i)].append(i)
 
-        res = []
-
-        for l in D.values():
-            res.append(l)
-
-        return res
-
-
-from typing import List, Tuple
+        return [l for l in D.values()]
 
 
 class EulerTour:
-    def __init__(self, edges: List[Tuple[int, int, int]], root: int = 0) -> None:
-        """
+    def __init__(self, edges: list[tuple[int, int, int]], root: int = 0) -> None:
+        """オイラーツアーのライブラリ
+
         edges[i] = (u, v, w)
         なお閉路がない、連結という前提 エラー処理をしていない
 
@@ -1116,15 +1049,14 @@ class EulerTour:
         Warning:
         ac-library-pythonを__init__内で使用しているので注意
         定数倍が遅い事に注意 あとメモリも注意 結構リストを使用している
-        """
-        # assert len(edges) >= 1
 
+        """
         from atcoder.segtree import SegTree
 
         self.edges = edges
         self._n = max([max(u, v) for u, v, w in edges]) + 1
         self.root = root
-        self.graph: List[List[Tuple[int, int, int]]] = [[] for _ in [0] * self._n]
+        self.graph: list[list[tuple[int, int, int]]] = [[] for _ in [0] * self._n]
 
         for i, (u, v, w) in enumerate(edges):
             self.graph[u].append((v, w, i))
@@ -1139,12 +1071,10 @@ class EulerTour:
             [(d, i) for i, d in enumerate(self.depth)],
         )
 
-        return
-
     def _build(self) -> None:
-        self.euler_tour: List[Tuple[int, int]] = [(0, -1)]
-        self.edge_cost: List[int] = [0]
-        self.depth: List[int] = [0]
+        self.euler_tour: list[tuple[int, int]] = [(0, -1)]
+        self.edge_cost: list[int] = [0]
+        self.depth: list[int] = [0]
 
         def dfs(cur: int, p: int = -1, d: int = 0) -> None:
             for nxt, w, i in self.graph[cur]:
@@ -1180,8 +1110,6 @@ class EulerTour:
             self.last_arrival[u] = i
 
     def lca(self, a: int, b: int) -> int:
-        # assert 0 <= a < self._n and 0 <= b < self._n
-
         l, r = (
             min(self.first_arrival[a], self.first_arrival[b]),
             max(self.last_arrival[a], self.last_arrival[b]),
@@ -1194,10 +1122,7 @@ class EulerTour:
         return self.segtree_edgecost.prod(0, self.first_arrival[u] + 1)
 
     def path_query(self, a: int, b: int) -> int:
-        """
-        aからbへの最短経路
-        """
-        # assert 0 <= a < self._n and 0 <= b < self._n
+        """aからbへの最短経路"""
         try:
             l = self.lca(a, b)
         except IndexError:
@@ -1210,28 +1135,24 @@ class EulerTour:
         )
 
     def change_edge_cost(self, i: int, w: int) -> None:
-        # assert 0 <= i < len(self.edges)
         self.segtree_edgecost.set(self.edge_plus[i], w)
         self.segtree_edgecost.set(self.edge_minus[i], -w)
 
 
-from typing import List
-
-
 class PotentialUnionFind:
     def __init__(self, n: int) -> None:
-        """
-        重み付きunionfind
+        """重み付きunionfind
+
         俗に言う、牛ゲー
 
         uniteは、差を指定して、uniteします
         """
-        self.data: List[int] = [-1] * n
-        self.pot: List[int] = [0] * n
+        self.data: list[int] = [-1] * n
+        self.pot: list[int] = [0] * n
 
     def root(self, vtx: int) -> int:
-        """
-        頂点vtxの親を出力します
+        """頂点vtxの親を出力します
+
         ポテンシャルは出力しません
         """
         if self.data[vtx] < 0:
@@ -1244,22 +1165,18 @@ class PotentialUnionFind:
         return rt
 
     def potential(self, vtx: int) -> int:
-        """
-        頂点vtxのポテンシャルを出力します
-        """
+        """頂点vtxのポテンシャルを出力します"""
         self.root(vtx)
 
         return self.pot[vtx]
 
     def same(self, a: int, b: int) -> bool:
-        """
-        頂点aと頂点bが同じ連結成分かを判定します
-        """
+        """頂点aと頂点bが同じ連結成分かを判定します"""
         return self.root(a) == self.root(b)
 
     def unite(self, a: int, b: int, p: int) -> bool:
-        """
-        頂点aから頂点bを、pの距離でmergeします
+        """頂点aから頂点bを、pの距離でmergeします
+
         計算量はlog nです
         """
         p += self.potential(b) - self.potential(a)
@@ -1279,21 +1196,16 @@ class PotentialUnionFind:
         return True
 
     def diff(self, a: int, b: int) -> int:
-        """
-        頂点aから頂点bの距離を、出力します
-        """
-
+        """頂点aから頂点bの距離を、出力します"""
         return self.potential(a) - self.potential(b)
 
 
-from typing import Any, Callable, List, Tuple
+from collections.abc import Callable
+from typing import Any
 
 
 def _keys_for_heapq(x: Any):
-    """
-    先頭の値を取得する
-    """
-
+    """先頭の値を取得する"""
     cur = x
 
     while True:
@@ -1307,13 +1219,13 @@ def _keys_for_heapq(x: Any):
 
 class HeapBase:
     def __init__(
-        self, arr: List[Any] = [], key: Callable[Any, Any] = _keys_for_heapq
+        self,
+        arr: list[Any] = [],
+        key: Callable[Any, Any] = _keys_for_heapq,
     ) -> None:
-        """
-        arrはソート済みが前提です
-        """
+        """arrはソート済みが前提です"""
         self.key: Callable[Any, Any] = key
-        self.lis: List[Tuple[Any, Any]] = [(self.key(x), x) for x in arr]
+        self.lis: list[tuple[Any, Any]] = [(self.key(x), x) for x in arr]
 
     def _op(self, a: int, b: int) -> bool:
         # aが親 bが子って感じだよ
@@ -1380,13 +1292,17 @@ class HeapMax(HeapBase):
 # Trie木
 class Trie:
     class Data:
+        """trie木のノード"""
+
         def __init__(self, value, ind):
+            """trie木のノード"""
             self.count = 1
             self.value = value
             self.childs = {}
             self.ind = ind
 
     def __init__(self):
+        """Trie木"""
         self.data = [self.Data("ab", 0)]  # 初期値はabにして被らないようにする
 
     def add(self, value: str) -> int:
@@ -1447,18 +1363,19 @@ class Trie:
 
 
 import math
-from typing import Any, Callable, List
+from collections.abc import Callable
+from typing import Any
 
 
 def mo_algorithm(
     N: int,
-    queries: List[Any],
+    queries: list[Any],
     add: Callable[[int], Any],
     delete: Callable[[int], Any],
     getvalue: Callable[[], Any],
-) -> List[Any]:
-    """
-    Mo's algorithmの関数
+) -> list[Any]:
+    """Mo's algorithm
+
     queriesは、(左端, 右端)で1-indexed
     addはあるindexが追加される時の値を現在の値にする
     deleteはあるindexが削除される時の値を現在の値にする
@@ -1498,11 +1415,16 @@ def mo_algorithm(
 
 
 import math
-from typing import Any, Callable, List
+from collections.abc import Callable
+from typing import Any
 
 
 class SquareDivision:
-    def __init__(self, lis: List[Any], op: Callable[[Any, Any], Any]) -> None:
+    def __init__(self, lis: list[Any], op: Callable[[Any, Any], Any]) -> None:
+        """平方分割ライブラリ
+
+        ほぼACLのセグ木と同じ
+        """
         self.n = len(lis)
         self.op = op
         self.block_size = math.isqrt(self.n)
@@ -1524,9 +1446,7 @@ class SquareDivision:
         return (i + self.block_size - 1) // self.block_size
 
     def prod(self, l: int, r: int) -> Any:
-        """
-        rは0-indexedなのに注意してください
-        """
+        """rは0-indexedなのに注意してください"""
         assert 0 <= l <= r < self.n
 
         l_block_left = self.get_block_index_left(l)
@@ -1569,10 +1489,14 @@ class SquareDivision:
 class SquareDivisionSpeedy(SquareDivision):
     def __init__(
         self,
-        lis: List[Any],
+        lis: list[Any],
         op: Callable[[Any, Any], Any],
         delete: Callable[[Any, Any], Any],
     ) -> None:
+        """その値を削除する関数がある場合の平方分割ライブラリ
+
+        更新は高速だがクエリがボトルネックなのであまり変わらない
+        """
         self.delete = delete
         super().__init__(lis, op)
 
@@ -1587,6 +1511,7 @@ class SquareDivisionSpeedy(SquareDivision):
 
 class PrefixSum2D:
     def __init__(self, h: int, w: int) -> None:
+        """二次元累積和のライブラリ"""
         self.data = [[0] * (w + 1) for _ in [0] * (h + 1)]
         self.builded = False
         self.h = h
@@ -1608,8 +1533,11 @@ class PrefixSum2D:
             for i in range(self.h):
                 self.data[i + 1][k] += self.data[i][k]
 
+        self.builded = True
+
     def prod(self, ax: int, ay: int, bx: int, by: int) -> int:
         assert 0 <= ax <= bx < self.h and 0 <= ay <= by < self.w
+        assert self.builded
 
         return (
             self.data[bx + 1][by + 1]
@@ -1619,13 +1547,14 @@ class PrefixSum2D:
         )
 
 
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 
 class DualSegmentTree:
-    def __init__(self, op: Callable[[Any, Any], Any], e: Any, n: int) -> None:
-        """
-        区間作用/一点取得のセグメント木
+    def __init__(self, op: Callable[[Any, Any], Any], e, n: int) -> None:
+        """区間作用/一点取得のセグメント木
+
         opは区間作用用の関数
         eは初期値
         vは長さ
@@ -1637,9 +1566,7 @@ class DualSegmentTree:
         self.data = [e] * (self.n * 2)
 
     def apply(self, l, r, x) -> None:
-        """
-        区間[l,r)にxを適用
-        """
+        """区間[l,r)にxを適用"""
         assert 0 <= l <= r <= self.n
         l += self.n
         r += self.n
@@ -1656,9 +1583,7 @@ class DualSegmentTree:
             r >>= 1
 
     def get(self, p: int) -> Any:
-        """
-        pの値を取得する
-        """
+        """pの値を取得する"""
         assert 0 <= p < self.n
 
         res = self._e
@@ -1671,35 +1596,26 @@ class DualSegmentTree:
         return res
 
 
-from typing import Tuple
-
-
 def euclid_dis(x1: int, y1: int, x2: int, y2: int) -> int:
-    """
-    ユークリッド距離を計算します
+    """ユークリッド距離を計算する関数
 
     注意:
     この関数はsqrtを取りません(主に少数誤差用)
     sqrtを取りたい場合は、自分で計算してください
     """
-
     return ((x1 - x2) ** 2) + ((y1 - y2) ** 2)
 
 
 def manhattan_dis(x1: int, y1: int, x2: int, y2: int) -> int:
-    """
-    マンハッタン距離を計算します
-    """
-
+    """マンハッタン距離を計算する関数"""
     return abs(x1 - x2) + abs(y1 - y2)
 
 
-def manhattan_45turn(x: int, y: int) -> Tuple[int]:
-    """
-    座標を45度回転します
+def manhattan_45turn(x: int, y: int) -> tuple[int]:
+    """マンハッタン距離用の座標を45度回転する関数
+
     回転すると、マンハッタン距離が、チェビシェフ距離になるので、距離の最大値などが簡単に求められます
     """
-
     res_x = x - y
     res_y = x + y
 
@@ -1707,10 +1623,7 @@ def manhattan_45turn(x: int, y: int) -> Tuple[int]:
 
 
 def chebyshev_dis(x1: int, y1: int, x2: int, y2: int) -> int:
-    """
-    チェビシェフ距離を計算します
-    """
-
+    """チェビシェフ距離を計算する関数"""
     return max(abs(x1 - x2), abs(y1 - y2))
 
 

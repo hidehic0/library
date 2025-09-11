@@ -1,6 +1,7 @@
 # YesNo関数
 def YesNoTemplate(state: bool, upper: bool = False) -> str:
-    """
+    """YesNo関数のテンプレート
+
     stateがTrueなら、upperに応じてYes,YESをreturn
     stateがFalseなら、upperに応じてNo,NOをreturnする
     """

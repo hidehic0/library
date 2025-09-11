@@ -1,11 +1,9 @@
-from typing import Any, Callable, List, Tuple
+from collections.abc import Callable
+from typing import Any
 
 
 def _keys_for_heapq(x: Any):
-    """
-    先頭の値を取得する
-    """
-
+    """先頭の値を取得する"""
     cur = x
 
     while True:
@@ -19,13 +17,13 @@ def _keys_for_heapq(x: Any):
 
 class HeapBase:
     def __init__(
-        self, arr: List[Any] = [], key: Callable[Any, Any] = _keys_for_heapq
+        self,
+        arr: list[Any] = [],
+        key: Callable[Any, Any] = _keys_for_heapq,
     ) -> None:
-        """
-        arrはソート済みが前提です
-        """
+        """arrはソート済みが前提です"""
         self.key: Callable[Any, Any] = key
-        self.lis: List[Tuple[Any, Any]] = [(self.key(x), x) for x in arr]
+        self.lis: list[tuple[Any, Any]] = [(self.key(x), x) for x in arr]
 
     def _op(self, a: int, b: int) -> bool:
         # aが親 bが子って感じだよ
