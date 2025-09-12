@@ -275,7 +275,7 @@ def create_array3(a: int, b: int, c: int, default=0) -> list[list[list[Any]]]:
     return [[[default] * c for _ in [0] * b] for _ in [0] * a]
 
 
-from typing.abc import Callable
+from collections.abc import Callable
 
 
 def binary_search(
@@ -307,9 +307,6 @@ def binary_search(
             right = mid
 
     return left if return_left else right
-
-
-from typing import Self
 
 
 def mod_add(a: int, b: int, mod: int) -> int:
@@ -363,7 +360,7 @@ class ModInt:
     def __add__(self, rhs) -> int:
         return mod_add(self.x, self.rhs(rhs), self.mod)
 
-    def __iadd__(self, rhs) -> Self:
+    def __iadd__(self, rhs) -> "ModInt":
         self.x = self.__add__(rhs)
 
         return self
@@ -371,7 +368,7 @@ class ModInt:
     def __sub__(self, rhs) -> int:
         return mod_sub(self.x, self.rhs(rhs), self.mod)
 
-    def __isub__(self, rhs) -> Self:
+    def __isub__(self, rhs) -> "ModInt":
         self.x = self.__sub__(rhs)
 
         return self

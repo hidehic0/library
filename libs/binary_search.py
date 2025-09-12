@@ -1,4 +1,4 @@
-from typing.abc import Callable
+from collections.abc import Callable
 
 
 def binary_search(

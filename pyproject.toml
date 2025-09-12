@@ -48,9 +48,11 @@ ignore = [
   "RUF002",
   "RUF005",
   "PT",
+  "PYI034",
+  "D104",
 ]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "libs/yn_func.py" = ["N802", "D", "PLR1722", "FBT003", "T201"]
 "code" = ["ALL"]
 "libs/memo.py" = ["ALL"]

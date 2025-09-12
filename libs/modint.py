@@ -1,6 +1,3 @@
-from typing import Self
-
-
 def mod_add(a: int, b: int, mod: int) -> int:
     """足し算してmodを取った値を出力
 
@@ -52,7 +49,7 @@ class ModInt:
     def __add__(self, rhs) -> int:
         return mod_add(self.x, self.rhs(rhs), self.mod)
 
-    def __iadd__(self, rhs) -> Self:
+    def __iadd__(self, rhs) -> "ModInt":
         self.x = self.__add__(rhs)
 
         return self
@@ -60,7 +57,7 @@ class ModInt:
     def __sub__(self, rhs) -> int:
         return mod_sub(self.x, self.rhs(rhs), self.mod)
 
-    def __isub__(self, rhs) -> Self:
+    def __isub__(self, rhs) -> "ModInt":
         self.x = self.__sub__(rhs)
 
         return self
