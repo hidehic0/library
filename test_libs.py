@@ -1,6 +1,7 @@
 # competitive-verifier: UNITTEST PYTHON_UNITTEST_RESULT
 import unittest
 
+from libs.change_minmax import ChangeMax, ChangeMin
 from libs.coordinate_compression import compress_1d
 from libs.euler_tour import EulerTour
 from libs.grid import coordinate_check
@@ -173,6 +174,24 @@ class TestEulerTour(unittest.TestCase):
                     self.assertEqual(ET.path_query(l[1], l[2]), ans)
             else:
                 ET.change_edge_cost(l[1], l[2])
+
+
+class TestChangeMinMax(unittest.TestCase):
+    def test_change_min(self) -> None:
+        T = ChangeMin(5)
+        self.assertEqual(T.val(), 5)
+        T.set(6)
+        self.assertEqual(T.val(), 5)
+        T.set(3)
+        self.assertEqual(T.val(), 3)
+
+    def test_change_max(self) -> None:
+        T = ChangeMax(5)
+        self.assertEqual(T.val(), 5)
+        T.set(3)
+        self.assertEqual(T.val(), 5)
+        T.set(6)
+        self.assertEqual(T.val(), 6)
 
 
 if __name__ == "__main__":

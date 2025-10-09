@@ -7,9 +7,9 @@ echo "新しいmain.py作成完了"
 # テンプレ
 # /bin/cat python/<filename>.py >> code/main.py
 
-for file_name in "import.py" "standard_input.py" "math_func.py" "array_create.py" "binary_search.py" "modint.py" "yn_func.py" "grid.py" "coordinates_to_id.py" "dijkstra.py" "get_path.py" "dp.py" "coordinate_compression.py" "memo.py" "rerooting.py" "manacher.py" "rollinghash.py" "graph.py" "unionfind.py" "euler_tour.py" "potential_unionfind.py" "heap.py" "trie.py" "mo.py" "square-division.py" "prefix_sum_2d.py" "dual_segtree.py" "dis_lib.py" "alias.py" "utils.py"; do
+for file_name in "import.py" "standard_input.py" "math_func.py" "array_create.py" "binary_search.py" "change_minmax.py" "modint.py" "yn_func.py" "grid.py" "coordinates_to_id.py" "dijkstra.py" "get_path.py" "dp.py" "coordinate_compression.py" "memo.py" "rerooting.py" "manacher.py" "rollinghash.py" "graph.py" "unionfind.py" "euler_tour.py" "potential_unionfind.py" "heap.py" "trie.py" "mo.py" "square-division.py" "prefix_sum_2d.py" "dual_segtree.py" "dis_lib.py" "alias.py" "utils.py"; do
 
-  cat libs/${file_name} >>code/main.py
+	cat libs/${file_name} >>code/main.py
 done
 
 # function add_code() {
