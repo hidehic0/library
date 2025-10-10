@@ -10,4 +10,3 @@ run = "./pre_commit.bash"
 [env]
 _.python.venv = { path = ".venv" }
 PYTHONPATH = "."
-
