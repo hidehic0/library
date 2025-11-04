@@ -18,12 +18,15 @@ def _keys_for_heapq(x: Any):
 class HeapBase:
     def __init__(
         self,
-        arr: list[Any] = [],
+        arr: list[Any] | None = None,
         key: Callable[[Any], Any] = _keys_for_heapq,
     ) -> None:
         """arrはソート済みが前提です"""
         self.key: Callable[Any, Any] = key
-        self.lis: list[tuple[Any, Any]] = [(self.key(x), x) for x in arr]
+        if arr is not None:
+            self.lis: list[tuple[Any, Any]] = [(self.key(x), x) for x in arr]
+        else:
+            self.lis: list[tuple[Any, Any]] = []
 
     def _op(self, a: int, b: int) -> bool:
         # aが親 bが子って感じだよ
