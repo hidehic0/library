@@ -256,6 +256,44 @@ def comb(n: int, r: int, mod: int | None = None) -> int:
         return a * b
 
 
+def mat_mul(
+    a: list[list[int]],
+    b: list[list[int]],
+    mod: int | None = None,
+) -> list[list[int]]:
+    """行列の積"""
+    res = [[0] * len(b[0]) for _ in [0] * len(a)]
+
+    for i in range(len(a)):
+        for j in range(len(b[0])):
+            for k in range(len(b)):
+                res[i][j] += a[i][k] * b[k][j]
+
+                if mod is not None:
+                    res[i][j] %= mod
+
+    return res
+
+
+def mat_pow(a: list[list[int]], n: int, mod: int | None = None) -> list[list[int]]:
+    """行列累乗"""
+    assert n >= 0
+
+    res = [[0] * len(a) for _ in [0] * len(a)]
+
+    for i in range(len(a)):
+        res[i][i] = 1
+
+    while n > 0:
+        if n & 1:
+            res = mat_mul(res, a) if mod is None else mat_mul(res, a, mod)
+
+        a = mat_mul(a, a) if mod is None else mat_mul(a, a, mod)
+        n >>= 1
+
+    return res
+
+
 # 多次元配列作成
 from typing import Any
 
@@ -1249,12 +1287,15 @@ def _keys_for_heapq(x: Any):
 class HeapBase:
     def __init__(
         self,
-        arr: list[Any] = [],
+        arr: list[Any] | None = None,
         key: Callable[[Any], Any] = _keys_for_heapq,
     ) -> None:
         """arrはソート済みが前提です"""
         self.key: Callable[Any, Any] = key
-        self.lis: list[tuple[Any, Any]] = [(self.key(x), x) for x in arr]
+        if arr is not None:
+            self.lis: list[tuple[Any, Any]] = [(self.key(x), x) for x in arr]
+        else:
+            self.lis: list[tuple[Any, Any]] = []
 
     def _op(self, a: int, b: int) -> bool:
         # aが親 bが子って感じだよ
