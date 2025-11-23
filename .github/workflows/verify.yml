@@ -18,7 +18,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
       - run: echo "export PYTHONPATH=$(pwd)" >> $GITHUB_ENV # 追加
       - name: Set up competitive-verifier
         uses: competitive-verifier/actions/setup@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
@@ -67,7 +67,7 @@ jobs:
       matrix:
         index: ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
       - run: echo "export PYTHONPATH=$(pwd)" >> $GITHUB_ENV # 追加
       - name: Download verify_files.json
         uses: competitive-verifier/actions/download-verify-artifact@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
@@ -96,7 +96,7 @@ jobs:
     outputs:
       upload-pages: ${{steps.upload-pages.outcome == 'success'}}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           fetch-depth: 2147483647
       - run: echo "export PYTHONPATH=$(pwd)" >> $GITHUB_ENV # 追加
