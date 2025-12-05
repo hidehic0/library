@@ -54,6 +54,6 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "libs/yn_func.py" = ["N802", "D", "PLR1722", "FBT003", "T201"]
+"library_for_joi.py" = ["N802", "D", "PLR1722", "FBT003", "T201"]
 "code" = ["ALL"]
 "libs/memo.py" = ["ALL"]
-
