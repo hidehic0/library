@@ -1,3 +1,4 @@
+# github link: https://github.com/hidehic0/library/blob/main/library_for_joi.py
 import bisect
 import heapq
 import math
