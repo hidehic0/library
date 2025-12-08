@@ -1,5 +1,5 @@
 [tools]
-python = "3.14.0"
+python = "latest"
 
 [tasks]
 install = "uv sync && mise generate git-pre-commit --write --task=pre-commit"
