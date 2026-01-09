@@ -57,3 +57,6 @@ ignore = [
 "library_for_joi.py" = ["N802", "D", "PLR1722", "FBT003", "T201"]
 "code" = ["ALL"]
 "libs/memo.py" = ["ALL"]
+
+[tool.uv.sources]
+ac-library-python = { git = "https://github.com/not522/ac-library-python" }
