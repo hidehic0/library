@@ -1,3 +1,10 @@
+/**
+ ベースのmain.cpp: https://github.com/hidehic0/library/blob/main/code/main.cpp
+ oj-bundleで展開されたライブラリ: https://github.com/hidehic0/library_cpp
+ ライセンスはどちらもUnlicenseです
+ oj-bundleで展開されたのは/home/hidehic0/src以下にhttps://を付けるとgithubのソースに移動できます
+ 確認の際はそちらを見てください
+**/
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/all>
