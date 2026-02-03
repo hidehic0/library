@@ -13,6 +13,7 @@ using namespace atcoder;
 #define CPP_DUMP_DEFINE_EXPORT_OBJECT(...)
 #define CPP_DUMP_DEFINE_EXPORT_ENUM(...)
 #define CPP_DUMP_DEFINE_EXPORT_OBJECT_GENERIC(...)
+#define export_command
 #else
 #include <cpp-dump/cpp-dump.hpp>
 #define dump(...) cpp_dump(__VA_ARGS__)
