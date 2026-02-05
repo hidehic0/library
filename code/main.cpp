@@ -1,7 +1,26 @@
 /**
  library: https://github.com/hidehic0/library_cpp
 **/
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <array>
+#include <cassert>
+#include <chrono>
+#include <clocale>
+#include <cmath>
+#include <functional>
+#include <ios>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <optional>
+#include <ostream>
+#include <queue>
+#include <ranges>
+#include <set>
+#include <stack>
+#include <string>
+#include <tuple>
+#include <vector>
 using namespace std;
 #include <atcoder/all>
 using namespace atcoder;
