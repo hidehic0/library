@@ -13,7 +13,7 @@ INCLUDES := -I$(LIBPATH) -I/usr/include
 cpp-build: $(OUTPUT)
 
 $(ALL.H.GCH): $(ALL.H)
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -x cxx-header $< -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c cxx-header $<
 $(OUTPUT): $(TARGET) $(ALL.H.GCH)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< -o $@
 
