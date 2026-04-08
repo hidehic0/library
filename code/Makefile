@@ -1,17 +1,33 @@
-TARGET=main.cpp
-OUTPUT=a.out
-LIBPATH=$(HOME)/src/github.com/hidehic0/library_cpp
-PROJECTPATH=$(HOME)/src/github.com/hidehic0/atcoder
+TARGET := main.cpp
+OUTPUT := a.out
 
-cpp-build: $(TARGET)
-	@$(PROJECTPATH)/.bin/date_check_build.sh "g++ -I$(LIBPATH) -I/usr/include -std=gnu++23 -Wall $(TARGET)" $(TARGET) $(OUTPUT)
+LIBPATH := $(HOME)/src/github.com/hidehic0/library_cpp
+ALL.H := $(LIBPATH)/all.h
+ALL.H.GCH := $(LIBPATH)/all.h.gch
+PROJECTPATH := $(HOME)/src/github.com/hidehic0/atcoder
 
-cpp-debug: $(TARGET)
-	@rm -f a.out
-	@$(PROJECTPATH)/.bin/date_check_build.sh "g++ -I$(LIBPATH) -I/usr/include -std=gnu++23 -g -Wall $(TARGET)" $(TARGET) $(OUTPUT)
+CXX := g++
+CXXFLAGS := -std=gnu++23 -Wall
+INCLUDES := -I$(LIBPATH) -I/usr/include
 
-cpp-run: cpp-build
+cpp-build: $(OUTPUT)
+
+$(ALL.H.GCH): $(ALL.H)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -x cxx-header $< -o $@
+$(OUTPUT): $(TARGET) $(ALL.H.GCH)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< -o $@
+
+
+cpp-debug: CXXFLAGS += -g
+cpp-debug: clean $(OUTPUT)
+
+cpp-run: $(OUTPUT)
 	@./$(OUTPUT)
 
+clean:
+	rm -f $(OUTPUT)
+
 cpp-bundle: $(TARGET)
-	@oj-bundle $(TARGET) -I$(LIBPATH) | wl-copy
+	@oj-bundle $(TARGET) $(INCLUDES) | wl-copy
+
+.PHONY: cpp-build
