@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - run: echo "export PYTHONPATH=$(pwd)" >> $GITHUB_ENV # 追加
       - name: Set up competitive-verifier
-        uses: competitive-verifier/actions/setup@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
+        uses: competitive-verifier/actions/setup@f73bf3d0365949089e9ed1fc530322720b5cf3a7 # v2.1.0
         with:
           cache-pip: true
       - name: python unittest
@@ -31,7 +31,7 @@ jobs:
           python -m pip install git+https://github.com/not522/ac-library-python
           python test_libs.py
       - name: oj-resolve
-        uses: competitive-verifier/actions/oj-resolve@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
+        uses: competitive-verifier/actions/oj-resolve@f73bf3d0365949089e9ed1fc530322720b5cf3a7 # v2.1.0
         with:
           output-path: verify_files.json
           include: |
@@ -44,7 +44,7 @@ jobs:
         env:
           PYTHON_UNITTEST_RESULT: ${{ steps.python-unittest.outcome == 'success' }}
       - name: Upload verify_files.json
-        uses: competitive-verifier/actions/upload-verify-artifact@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
+        uses: competitive-verifier/actions/upload-verify-artifact@f73bf3d0365949089e9ed1fc530322720b5cf3a7 # v2.1.0
         with:
           file: verify_files.json
       - name: Check bundled
@@ -70,13 +70,13 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - run: echo "export PYTHONPATH=$(pwd)" >> $GITHUB_ENV # 追加
       - name: Download verify_files.json
-        uses: competitive-verifier/actions/download-verify-artifact@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
+        uses: competitive-verifier/actions/download-verify-artifact@f73bf3d0365949089e9ed1fc530322720b5cf3a7 # v2.1.0
       - name: Set up competitive-verifier
-        uses: competitive-verifier/actions/setup@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
+        uses: competitive-verifier/actions/setup@f73bf3d0365949089e9ed1fc530322720b5cf3a7 # v2.1.0
         with:
           cache-pip: true
       - name: Verify
-        uses: competitive-verifier/actions/verify@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
+        uses: competitive-verifier/actions/verify@f73bf3d0365949089e9ed1fc530322720b5cf3a7 # v2.1.0
         with:
           destination: ${{runner.temp}}/result.json
           split-size: ${{ env.SPLIT_SIZE }}
@@ -102,7 +102,7 @@ jobs:
       - run: echo "export PYTHONPATH=$(pwd)" >> $GITHUB_ENV # 追加
       - name: Download verify_files.json and all artifacts
         id: all-artifacts
-        uses: competitive-verifier/actions/download-verify-artifact@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
+        uses: competitive-verifier/actions/download-verify-artifact@f73bf3d0365949089e9ed1fc530322720b5cf3a7 # v2.1.0
         with:
           download-all: true
           artifact-root: .artifacts/
@@ -119,11 +119,11 @@ jobs:
         env:
           SRCDIR: .artifacts/Bundled-${{ runner.os }}
       - name: Set up competitive-verifier
-        uses: competitive-verifier/actions/setup@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
+        uses: competitive-verifier/actions/setup@f73bf3d0365949089e9ed1fc530322720b5cf3a7 # v2.1.0
         with:
           cache-pip: true
       - name: Docs
-        uses: competitive-verifier/actions/docs@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
+        uses: competitive-verifier/actions/docs@f73bf3d0365949089e9ed1fc530322720b5cf3a7 # v2.1.0
         with:
           verify-result: ${{ steps.all-artifacts.outputs.artifacts-root }}/Result-*/result.json
           destination: _jekyll
@@ -141,7 +141,7 @@ jobs:
         with:
           path: _site
       - name: Check
-        uses: competitive-verifier/actions/check@af681adfd1e9bd6588e56e1a83c5ca78087fb872 # v2.0.4
+        uses: competitive-verifier/actions/check@f73bf3d0365949089e9ed1fc530322720b5cf3a7 # v2.1.0
         with:
           verify-result: ${{ steps.all-artifacts.outputs.artifacts-root }}/Result-*/result.json
   deploy:
