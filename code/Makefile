@@ -28,6 +28,6 @@ clean:
 	rm -f $(OUTPUT)
 
 cpp-bundle: $(TARGET)
-	@oj-bundle $(TARGET) $(INCLUDES) | wl-copy
+	@oj-bundle $(TARGET) $(INCLUDES) | sed -E 's|^#line [0-9]+ "/home/hidehic0/src/github.com/hidehic0/library_cpp/([^"]+)"|// source: https://github.com/hidehic0/library_cpp/blob/main/\1|' | wl-copy
 
 .PHONY: cpp-build
