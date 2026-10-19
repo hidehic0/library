@@ -1,3 +1,4 @@
+# https://github.com/hidehic0/library/blob/main/code/main.py
 r"""
  ______________________
 < this is hidehic0's code >
