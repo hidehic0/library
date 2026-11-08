@@ -28,6 +28,8 @@ clean:
 	rm -f $(OUTPUT)
 
 cpp-bundle: $(TARGET)
-	@oj-bundle $(TARGET) $(INCLUDES) | wl-copy
+	@sed -i  's/\(\s*#pragma GCC.*\)/\/\/ OJBUNDLEEXCLUDE \1/' $(TARGET)
+	@oj-bundle $(TARGET) $(INCLUDES) | sed -E 's/\/\/ OJBUNDLEEXCLUDE //' | wl-copy
+	@sed -i 's/\/\/ OJBUNDLEEXCLUDE //' "$(TARGET)"
 
 .PHONY: cpp-build
