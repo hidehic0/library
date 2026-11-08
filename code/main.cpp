@@ -1,5 +1,5 @@
 #ifdef ONLINE_JUDGE
-#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC optimize("O3, unroll-loops")
 #pragma GCC target("tune=native")
 #endif
 
