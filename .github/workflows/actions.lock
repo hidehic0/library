@@ -5,7 +5,7 @@ version: 'v0.0.3'
 workflows:
     '.github/workflows/codeql.yml':
         - 'actions/checkout@v7.0.1'
-        - 'github/codeql-action@v4.36.0'
+        - 'github/codeql-action@v4.39.5'
     '.github/workflows/verify.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/configure-pages@v6.0.0'
@@ -82,8 +82,8 @@ dependencies:
             - 'actions/download-artifact@v8'
             - 'actions/setup-python@v7'
             - 'actions/upload-artifact@v7'
-    'github/codeql-action@v4.36.0':
-        ref: 'v4.36.0'
-        commit: 'sha1-7211b7c8077ea37d8641b6271f6a365a22a5fbfa'
+    'github/codeql-action@v4.39.5':
+        ref: 'v4.39.5'
+        commit: 'sha1-915412ff23e8b7659517e607487dbeae018f2934'
         owner_id: 9919
         repo_id: 259445878
